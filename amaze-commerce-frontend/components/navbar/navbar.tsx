@@ -2,17 +2,19 @@ import Link from "next/link";
 import UserIcon from "@/public/icons/user.png";
 import Image from "next/image";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
 
 export default function NavBar() {
   // Nav links
   const NavLinks = (
     <>
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/products">All Product</Link>
       </li>
       <li>
-        <Link href="/trash">Trash</Link>
+        <Link href="/user/register">Register</Link>
+      </li>
+      <li>
+        <Link href="/user/cart">Cart</Link>
       </li>
     </>
   );
@@ -53,11 +55,11 @@ export default function NavBar() {
           <input
             type="text"
             placeholder="search"
-            className="border-2 flex  rounded-lg border-yellow-300 px-2 py-1"
+            className="border-2 rounded-lg border-yellow-300 px-2  py-1"
           />
-          <Button className="-ml-12">
-            <SearchIcon />
-          </Button>
+          <button className="absolute right-2">
+            <SearchIcon style={{ fontSize: '24px' }}/>
+          </button>
         </div>
         {/* navbar center */}
         <div className="navbar-center hidden lg:flex">
@@ -65,9 +67,9 @@ export default function NavBar() {
         </div>
         {/* navbar end */}
         <div className="navbar-end">
-          <Button>
+          <button className="btn btn-ghost">
             <Image src={UserIcon} alt="user" height={20} width={20} />
-          </Button>
+          </button>
         </div>
       </div>
     </nav>

@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Flip Animation */
+@keyframes flip {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-flip {
+  animation: flip 1s ease-in-out forwards;
+}
