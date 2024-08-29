@@ -8,10 +8,10 @@ export default function NavBar() {
   const NavLinks = (
     <>
       <li>
-        <Link href="/products">All Product</Link>
+        <Link href="/products/1">All Product</Link>
       </li>
       <li>
-        <Link href="/user/register">Register</Link>
+        <Link href="/auth/register">Register</Link>
       </li>
       <li>
         <Link href="/user/cart">Cart</Link>
@@ -20,7 +20,7 @@ export default function NavBar() {
   );
 
   return (
-    <nav>
+    <div>
       <div className="navbar mb-[40px] md:mb-[10px]  bg-base-200 text-[#1E2A5E] relative">
         {/*navbar start  */}
         <div className="navbar-start">
@@ -48,18 +48,25 @@ export default function NavBar() {
               {NavLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost ml-16 md:ml-0 text-xl">AmazeCom</a>
+          <Link href="/" className="btn btn-ghost ml-16 md:ml-0 text-xl">
+            <h3>
+               Amaze<span className="text-yellow-500">Com</span>
+            </h3>
+          </Link>
         </div>
         {/* search field */}
         <div className="absolute ml-20 md:relative mt-[80px] md:mt-0">
-          <input
-            type="text"
-            placeholder="search"
-            className="border-2 rounded-lg border-yellow-300 px-2  py-1"
-          />
-          <button className="absolute right-2">
-            <SearchIcon style={{ fontSize: '24px' }}/>
-          </button>
+          <form action="/products/searchResults" method="get">
+            <input
+              type="text"
+              name="searchTerm"
+              placeholder="search"
+              className="border-2 rounded-lg border-yellow-300 px-2 py-1"
+            />
+            <button type="submit" className="absolute top-1 right-2">
+              <SearchIcon style={{ fontSize: "24px" }} />
+            </button>
+          </form>
         </div>
         {/* navbar center */}
         <div className="navbar-center hidden lg:flex">
@@ -72,6 +79,6 @@ export default function NavBar() {
           </button>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

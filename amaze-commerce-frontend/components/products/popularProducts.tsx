@@ -1,4 +1,5 @@
 import { getPopularProducts } from "@/lib/e-commerce";
+import Link from "next/link";
 
 
 export default async function PopularProducts() {
@@ -6,17 +7,14 @@ export default async function PopularProducts() {
     
   return (
     <div>
-      <h3 className="text-3xl text-center font-semibold text-blue-950 mt-12 my-8">
-        Most Popular
-      </h3>
       <div className="grid lg:grid-cols-6 gap-4">
         {popularProducts.map((product: any) => (
-          <div
-            className="h-[200px] w-[200px] border-[1px] rounded-lg flex justify-center items-center p-2"
+          <Link href={`/products/singleProduct/${product._id}`}
+            className="h-[200px] w-[200px] shadow-md shadow-stone-300 border-[1px] rounded-lg flex justify-center items-center p-2"
             key={product.userId}
           >
-            <p className="text-gray-500 text-xl antialiased">{product.title}</p>
-          </div>
+            <p className="text-gray-500 text-xl antialiased"><img src={product.displayImage} alt="" /></p>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { categories } from "./categoriesList";
+import Link from "next/link";
 
 
 
@@ -8,7 +9,7 @@ export default function Categories() {
     <div className="w-full animate-flip">
       <div className="-mt-28 gap-4 flex flex-wrap justify-evenly  w-full">
         {categories.map((category) => (
-          <div
+          <Link href={`/products/searchResults?searchTerm=${category.name}`}
             className="h-[400px] w-[400px] border-gray-100 border-[1px] rounded-lg shadow-slate-400 shadow-lg bg-gray-50"
             key={category._id}
           >
@@ -20,7 +21,7 @@ export default function Categories() {
                 see more
               </Button>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

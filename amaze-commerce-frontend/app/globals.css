@@ -16,5 +16,27 @@
 }
 
 .animate-flip {
-  animation: flip 1s ease-in-out forwards;
+  animation: flip 0.5s ease-in-out forwards;
+}
+
+@keyframes shadowRunning {
+  0% {
+    box-shadow: 0 0 10px rgba(116, 116, 116, 0.6);
+  }
+  25% {
+    box-shadow: 10px 0 10px rgba(117, 117, 117, 0.6);
+  }
+  50% {
+    box-shadow: 10px 10px 10px rgba(138, 138, 138, 0.6);
+  }
+  75% {
+    box-shadow: 0 10px 10px rgba(141, 141, 141, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(201, 201, 201, 0.6);
+  }
+}
+
+.shadow-running-animation {
+  animation: shadowRunning 2s linear infinite; /* Adjust duration as needed */
 }
