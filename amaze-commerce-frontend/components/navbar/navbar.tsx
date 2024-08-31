@@ -8,7 +8,7 @@ export default function NavBar() {
   const NavLinks = (
     <>
       <li>
-        <Link href="/products/1">All Product</Link>
+        <Link href="/main/products/1">All Product</Link>
       </li>
       <li>
         <Link href="/auth/register">Register</Link>
@@ -48,7 +48,7 @@ export default function NavBar() {
               {NavLinks}
             </ul>
           </div>
-          <Link href="/" className="btn btn-ghost ml-16 md:ml-0 text-xl">
+          <Link href="/main" className="btn btn-ghost ml-16 md:ml-0 text-xl">
             <h3>
                Amaze<span className="text-yellow-500">Com</span>
             </h3>
@@ -56,7 +56,7 @@ export default function NavBar() {
         </div>
         {/* search field */}
         <div className="absolute ml-20 md:relative mt-[80px] md:mt-0">
-          <form action="/products/searchResults" method="get">
+          <form action="/main/searchResults" method="get">
             <input
               type="text"
               name="searchTerm"

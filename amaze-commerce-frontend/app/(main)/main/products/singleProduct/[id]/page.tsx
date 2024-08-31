@@ -9,7 +9,8 @@ export default async function SingleProduct({
 }) {
   const { id } = params;
   const product = await getProductById(id);
-  const relatedProducts = await getRelatedProducts(product?.tags);
+  const tags : any = product?.tags ? product.tags[0] : product?.category;
+  const relatedProducts = await getRelatedProducts(tags);
 
   return (
     <div className="min-h-screen container mx-auto">
@@ -31,7 +32,7 @@ export default async function SingleProduct({
               <div className="flex justify-center items-center gap-2">
                 <p className="text-xl text-gray-500 mb-2">{product?.rating}</p>
                 <div>
-                  <RatingComponent product={{ rating: product?.rating }} />
+                  <RatingComponent rating={product?.rating} />
                 </div>
               </div>
             </div>
@@ -125,7 +126,7 @@ export default async function SingleProduct({
           </h2>
           <div className="flex flex-wrap gap-8 mt-8">
             {relatedProducts.map((product: any) => (
-              <Link href={`/products/singleProduct/${product._id}`}
+              <Link href={`/main/products/singleProduct/${product._id}`}
                 className="shadow-slate-200 p-4 rounded-lg shadow-xl"
                 key={product._id}
               >

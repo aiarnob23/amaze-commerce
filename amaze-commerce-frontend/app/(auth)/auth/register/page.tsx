@@ -7,23 +7,24 @@ export default function Register() {
       {/* Background Video */}
       <div className="flex justify-center items-center absolute">
         <video
+          poster="/video/register-bg-poster.png"
           autoPlay
           loop
           muted
-          className="w-full h-[700px] top-5 rounded-lg relative z-0 object-cover  opacity-50"
+          className="w-full h-[700px] top-5 rounded-lg relative z-0 object-cover  opacity-70"
         >
           <source src="/video/register-bg.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
       <div className="relative z-10">
-        <h1 className="text-3xl font-bold text-center my-4">
-          Amaze<span className="text-yellow-500">Com</span>
-        </h1>
-        <div className="flex flex-col justify-center border-2 py-12 shadow-lg shadow-running-animation px-8 rounded-lg items-start">
-          <h3 className="text-4xl font-semibold mb-6">
-            Create account
-          </h3>
+        <Link href='/main'>
+          <h1 className="text-3xl font-bold text-center my-4">
+            Amaze<span className="text-yellow-500">Com</span>
+          </h1>
+        </Link>
+        <div className="flex flex-col md:glass justify-center border-2 py-12 shadow-lg  px-8 rounded-lg items-start">
+          <h3 className="text-4xl font-semibold mb-6">Create account</h3>
           <div>
             <form action="" className="flex flex-col">
               <label htmlFor="name" className="text-xl font-semibold mb-1">
@@ -59,7 +60,13 @@ export default function Register() {
               </button>
             </form>
             <div className="flex gap-3 mt-2">
-              <p className="text-xl ">Already have an account? </p> <Link className="text-blue-500 text-xl font-semibold" href={'/'}>Sign in</Link>
+              <p className="text-xl ">Already have an account? </p>{" "}
+              <Link
+                className="text-blue-200 text-xl font-semibold"
+                href="/auth/login"
+              >
+                Sign in
+              </Link>
             </div>
           </div>
         </div>

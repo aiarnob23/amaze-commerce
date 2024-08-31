@@ -21,7 +21,7 @@ export default function Pagination({
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    router.push(`/products/${page}`);
+    router.push(`/main/products/${page}`);
   };
 
   return (

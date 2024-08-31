@@ -9,7 +9,7 @@ export default async function PopularProducts() {
     <div>
       <div className="grid lg:grid-cols-6 gap-4">
         {popularProducts.map((product: any) => (
-          <Link href={`/products/singleProduct/${product._id}`}
+          <Link href={`/main/products/singleProduct/${product._id}`}
             className="h-[200px] w-[200px] shadow-md shadow-stone-300 border-[1px] rounded-lg flex justify-center items-center p-2"
             key={product.userId}
           >

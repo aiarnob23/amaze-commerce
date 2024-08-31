@@ -21,19 +21,19 @@
 
 @keyframes shadowRunning {
   0% {
-    box-shadow: 0 0 10px rgba(116, 116, 116, 0.6);
+    box-shadow: 0 0 10px rgba(142, 142, 142, 0.6);
   }
   25% {
-    box-shadow: 10px 0 10px rgba(117, 117, 117, 0.6);
+    box-shadow: 10px 0 10px rgba(124, 124, 124, 0.6);
   }
   50% {
-    box-shadow: 10px 10px 10px rgba(138, 138, 138, 0.6);
+    box-shadow: 10px 10px 10px rgba(144, 144, 144, 0.6);
   }
   75% {
-    box-shadow: 0 10px 10px rgba(141, 141, 141, 0.6);
+    box-shadow: 0 10px 10px rgba(129, 129, 129, 0.6);
   }
   100% {
-    box-shadow: 0 0 10px rgba(201, 201, 201, 0.6);
+    box-shadow: 0 0 10px rgba(215, 215, 215, 0.6);
   }
 }
 

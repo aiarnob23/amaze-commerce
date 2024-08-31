@@ -31,15 +31,18 @@ export async function getProductById(id:string) {
 }
 
 //get related products 
-export async function getRelatedProducts(tags: string[]) {
-    const res = await fetch(`${SERVER_BASE_URL}/products?searchTerm=${tags[0]}`)
+export async function getRelatedProducts(tags:any) {
+    const searchTerm = tags || '';
+    const res = await fetch(`${SERVER_BASE_URL}/products?searchTerm=${searchTerm}`)
     const {data} = await res.json();
     return data.data;
 }
 
 //get search results
 export async function getSearchResults(searchTerm: string) {
+    console.log(searchTerm);
     const res = await fetch(`${SERVER_BASE_URL}/products?searchTerm=${searchTerm}`);
     const { data } = await res.json();
+    console.log(data);
     return data.data;
 }

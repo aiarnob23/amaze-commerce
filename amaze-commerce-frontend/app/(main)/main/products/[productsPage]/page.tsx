@@ -1,3 +1,4 @@
+
 import Pagination from "@/components/pagination/pagination";
 import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
@@ -19,7 +20,7 @@ export default async function Products({ params }: { params: { productsPage: str
       <div className="grid grid-cols-4 gap-7">
         {products.map((product: any) => (
           <Link
-            href={`/products/singleProduct/${product._id}`}
+            href={`/main/products/singleProduct/${product._id}`}
             key={product._id}
             className="card bg-base-100 w-96 shadow-xl"
           >

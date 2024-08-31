@@ -2,6 +2,8 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import notFound from "./app/middlewares/notFound";
 import { ProductsRoutes } from "./app/modules/products/products.route";
+import { UsersRoutes } from "./app/modules/users/users.route";
+import globalErrorHandler from "./app/middlewares/globalErrorhandler";
 
 
 const app: Application = express();
@@ -13,9 +15,12 @@ app.use(cors());
 
 //routes 
 app.use("/api/products", ProductsRoutes);
+app.use("/api/user", UsersRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("Amaze commerce server site");
 });
+
+app.use(globalErrorHandler);
 app.use(notFound);
 
 export default app;
