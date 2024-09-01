@@ -1,8 +1,11 @@
+
+
 export type TUser = {
     email: string,
     name: string,
     phone: string,
-    password?: string,
+    role:'admin'|'user',
+    password: string,
     isVerified: boolean,
     otp: string,
 }

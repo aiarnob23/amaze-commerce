@@ -5,7 +5,7 @@ const newUserValidation = z.object({
         name: z.string(),
         email: z.string(),
         phone: z.string(),
-        password: z.string().optional(),
+        password: z.string(),
         isVerified: z.boolean().optional().default(false),
         otp:z.string().optional(),
     })

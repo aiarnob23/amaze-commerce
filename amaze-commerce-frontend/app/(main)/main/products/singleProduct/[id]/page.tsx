@@ -9,7 +9,7 @@ export default async function SingleProduct({
 }) {
   const { id } = params;
   const product = await getProductById(id);
-  const tags : any = product?.tags ? product.tags[0] : product?.category;
+  const tags: any = product?.tags ? product.tags[0] : product?.category;
   const relatedProducts = await getRelatedProducts(tags);
 
   return (
@@ -39,7 +39,7 @@ export default async function SingleProduct({
             <div>
               <div>
                 <div className="flex text-xl mb-2 font-medium text-gray-600 gap-3">
-                  {product?.tags?.map((tag: string, index:number) => (
+                  {product?.tags?.map((tag: string, index: number) => (
                     <p key={index}>{tag} |</p>
                   ))}
                 </div>
@@ -50,8 +50,10 @@ export default async function SingleProduct({
               <div className="flex gap-2 text-xl text-gray-700 mb-2">
                 color:
                 <div className="flex gap-2">
-                  {product?.color.map((color: string, index:number) => (
-                    <p key={index} className="">{color} |</p>
+                  {product?.color.map((color: string, index: number) => (
+                    <p key={index} className="">
+                      {color} |
+                    </p>
                   ))}
                 </div>
               </div>
@@ -126,7 +128,8 @@ export default async function SingleProduct({
           </h2>
           <div className="flex flex-wrap gap-8 mt-8">
             {relatedProducts.map((product: any) => (
-              <Link href={`/main/products/singleProduct/${product._id}`}
+              <Link
+                href={`/main/products/singleProduct/${product._id}`}
                 className="shadow-slate-200 p-4 rounded-lg shadow-xl"
                 key={product._id}
               >

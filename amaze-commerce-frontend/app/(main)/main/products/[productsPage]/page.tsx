@@ -1,13 +1,16 @@
-
 import Pagination from "@/components/pagination/pagination";
 import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
 import Link from "next/link";
 
-export default async function Products({ params }: { params: { productsPage: string } }) {
+export default async function Products({
+  params,
+}: {
+  params: { productsPage: string };
+}) {
   const page = parseInt(params.productsPage);
   const perPage = 20;
-    const { products, totalPages } = await getAllProducts(page, perPage);
+  const { products, totalPages } = await getAllProducts(page, perPage);
 
   return (
     <div className="container mx-auto my-12 min-h-screen">

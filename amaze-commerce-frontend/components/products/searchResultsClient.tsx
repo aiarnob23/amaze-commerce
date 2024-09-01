@@ -26,7 +26,7 @@ export default function SearchResultsClient() {
         {products.length > 0 ? (
           <div className="mt-14">
             <h2 className="text-gray-600 font-semibold text-xl">
-              Related products you may like
+              Results
             </h2>
             <div className="flex flex-wrap gap-8 mt-8">
               {products.map((product: any) => (
