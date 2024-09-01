@@ -1,7 +1,39 @@
+"use client";
+import { useAuth } from "@/app/provider/AuthProvider";
+import { registerUser } from "@/lib/user";
 import Link from "next/link";
+import { FormEvent, useState } from "react";
 
 
 export default function Register() {
+  const { login } = useAuth();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+
+  const handleRegisterUser = async (e : FormEvent) => {
+    e.preventDefault();
+    setError('');
+    if (password.length < 6) {
+      setError('Password should be at least 6 digits!');
+      return;
+    }
+    else {
+      if (name && email && phone && password) {
+        const data = await registerUser(name, email, phone, password);
+        if (data?.data?.data) {
+          login(email, password);
+        }
+      } else {
+        setError("All fields must be filled out");
+        return;
+      }
+    }
+};
+
   return (
     <div className="container relative mx-auto justify-center mb-20 items-center flex w-full">
       {/* Background Video */}
@@ -18,7 +50,7 @@ export default function Register() {
         </video>
       </div>
       <div className="relative z-10">
-        <Link href='/main'>
+        <Link href="/main">
           <h1 className="text-3xl font-bold text-center my-4">
             Amaze<span className="text-yellow-500">Com</span>
           </h1>
@@ -26,13 +58,18 @@ export default function Register() {
         <div className="flex flex-col md:glass justify-center border-2 py-12 shadow-lg  px-8 rounded-lg items-start">
           <h3 className="text-4xl font-semibold mb-6">Create account</h3>
           <div>
-            <form action="" className="flex flex-col">
+            <form
+              onSubmit={handleRegisterUser}
+              action=""
+              className="flex flex-col"
+            >
               <label htmlFor="name" className="text-xl font-semibold mb-1">
                 Your name
               </label>
               <input
                 type="text"
                 className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                onChange={(e) => setName(e.target.value)}
               />
               <label htmlFor="email" className="text-xl font-semibold mb-1">
                 Your email
@@ -40,6 +77,7 @@ export default function Register() {
               <input
                 type="email"
                 className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <label htmlFor="phone" className="text-xl font-semibold mb-1">
                 Mobile number
@@ -47,6 +85,7 @@ export default function Register() {
               <input
                 type="tel"
                 className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                onChange={(e) => setPhone(e.target.value)}
               />
               <label htmlFor="password" className="text-xl font-semibold mb-1">
                 Enter password
@@ -54,7 +93,13 @@ export default function Register() {
               <input
                 type="password"
                 className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                onChange={(e) => setPassword(e.target.value)}
               />
+              {
+                <div className="text-red-600 mb-2">
+                  {error && <p>{error}</p>}
+                </div>
+              }
               <button className="text-xl font-semibold btn btn-warning">
                 Continue
               </button>

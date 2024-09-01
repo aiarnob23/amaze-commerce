@@ -40,9 +40,7 @@ export async function getRelatedProducts(tags:any) {
 
 //get search results
 export async function getSearchResults(searchTerm: string) {
-    console.log(searchTerm);
     const res = await fetch(`${SERVER_BASE_URL}/products?searchTerm=${searchTerm}`);
     const { data } = await res.json();
-    console.log(data);
     return data.data;
 }

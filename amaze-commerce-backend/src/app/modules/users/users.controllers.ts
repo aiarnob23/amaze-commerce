@@ -9,20 +9,25 @@ import { userServices } from "./users.services";
 const createNewUser = catchAsync(async (req, res) => {
   const userData = req.body;
   const resultUser = await userServices.createNewUser(userData);
+  console.log('user created successfully: ', resultUser);
   if (resultUser._id) {
     const OTP = generateOTP(6);
     const result = await userServices.updateUsersOTP(resultUser?._id, OTP);
     if (result?.otp) {
       sendEmail(result.email, result.otp);
+      sendResponse(res, {
+        success: true, 
+        statusCode: httpStatus.OK,
+        message: 'Please verify your email',
+        data:resultUser,
+      })
     }
   }
 });
 
 //get user
 const getUser = catchAsync(async (req, res) => {
-    console.log('uid ', req.params.id);
   const result = await userServices.getUser(req.params.id);
-  console.log(result);
 });
 
 //resend otp
@@ -37,13 +42,12 @@ const resendOTPtoUser = catchAsync(async (req, res) => {
 
 //check users otp and verify users email
 const checkUsersOTP = catchAsync(async (req, res) => {
-  const id = req?.params?.id;
-  const payload = req?.body?.otp;
-  const result = await userServices.getUserOTPfromDB(id);
+  const email = req?.params?.email;
+  const payload = req?.query?.OTP;
+  const result = await userServices.getUserOTPfromDB(email);
   const OTP = result?.otp;
-  console.log(payload, " ", OTP);
   if (payload === OTP) {
-    const result = await userServices.updateUsersIsVerifiedState(id);
+    const result = await userServices.updateUsersIsVerifiedState(email);
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,

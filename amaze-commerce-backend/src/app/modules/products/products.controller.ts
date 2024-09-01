@@ -21,7 +21,6 @@ const getProducts = catchAsync(async (req, res) => {
 //add new product
 const addNewProduct = catchAsync(async (req, res) => {
     const result = await productsServices.addProduct(req.body);
-    console.log(result);
 })
 
 //find by id

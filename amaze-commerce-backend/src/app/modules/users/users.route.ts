@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/create-user', validateRequest(zodUserValidationSchema.newUserValidation), userControllers.createNewUser);
 router.get(`/:id`, userControllers.getUser);
 router.patch(`/resend-otp/:id`, userControllers.resendOTPtoUser);
-router.get(`/check-otp/:id`, userControllers.checkUsersOTP);
+router.get(`/check-otp/:email`, userControllers.checkUsersOTP);
 
 
 export const UsersRoutes = router;

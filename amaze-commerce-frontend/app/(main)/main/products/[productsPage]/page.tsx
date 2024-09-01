@@ -1,5 +1,4 @@
 import Pagination from "@/components/pagination/pagination";
-import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
 import Link from "next/link";
 
@@ -14,8 +13,6 @@ export default async function Products({
 
   return (
     <div className="container mx-auto my-12 min-h-screen">
-      <BasicBreadcrumbs />
-
       {/* filtering div */}
       <div></div>
 

@@ -20,13 +20,13 @@ const updateUsersOTP = async (id:any, OTP: string) => {
     return result;
 }
 //get users OTP
-const getUserOTPfromDB = async (id: any) => {
-    const result = await User.findById(id, { otp: 1 });
+const getUserOTPfromDB = async (email: string) => {
+    const result = await User.findOne({email:email}, { otp: 1 });
     return result;
 }
 //update users isVerified state
-const updateUsersIsVerifiedState = async (id: any) => {
-    const result = await User.findByIdAndUpdate(id, { isVerified: true, otp:'' }, { new: true });
+const updateUsersIsVerifiedState = async (email: string) => {
+    const result = await User.findOneAndUpdate({email:email}, { isVerified: true, otp:'' }, { new: true });
     return result;
 }
 

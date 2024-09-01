@@ -13,7 +13,6 @@ export default function SearchResultsClient() {
 
   useEffect(() => {
       const fetchProducts = async () => {
-      console.log(searchTerm);
       const data = await getSearchResults(searchTerm);
       setProducts(data);
     };

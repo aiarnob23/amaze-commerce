@@ -27,7 +27,6 @@ const addProduct = async (newProduct: any) => {
 //get product by id
 const getSingleProduct = async (id: any) => {
   const result = Product.findById(id);
-  console.log(result);
   return result;
 };
 //exports
