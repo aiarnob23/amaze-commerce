@@ -5,10 +5,11 @@ import { verifyEmail } from "@/lib/user";
 import { useState } from "react";
 
 export default function OTP() {
-  const [OTP, setOTP] = useState<string>("");
   const { user } = useAuth();
+  console.log(user);
+  const [OTP, setOTP] = useState<string>("");
   const checkOTP = async () => {
-    verifyEmail(OTP, user?.email);
+     verifyEmail(OTP, user?.email);
   }
   return (
     <div className="container mt-24 mb-20 mx-auto">

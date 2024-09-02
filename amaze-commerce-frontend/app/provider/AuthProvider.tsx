@@ -1,4 +1,5 @@
 "use client";
+import { SERVER_BASE_URL } from "@/lib/config";
 import { loginUser } from "@/lib/user";
 import {
   createContext,
@@ -14,47 +15,56 @@ interface AuthContextType {
   logout: () => void;
 }
 
-//AuthContext
+// AuthContext
 const AuthContext = createContext<AuthContextType | null>(null);
 
-//AuthProvider
+// AuthProvider
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
+    const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
+
   // login
   const login = async (email: string, password: string) => {
     try {
+      localStorage.removeItem("user");
+      localStorage.removeItem("accessToken");
       const res = await loginUser(email, password);
-      const token = res?.data?.data?.refreshToken;
+      const token = res?.data?.data?.accessToken;
       const userData = res?.data?.data?.result;
-
-      if (!userData) {
-        throw new Error("Login failed");
-        }
       setUser(userData);
-      sessionStorage.setItem("token", token);
-      sessionStorage.setItem("user", JSON.stringify(userData));
+
+      if (!userData || !token) {
+        throw new Error("Login failed: No user data or token received.");
+      }
+
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("user", JSON.stringify(userData));
+      
     } catch (error) {
-      console.log(error);
+      console.error("Login error:", error);
     }
   };
+
   // logout
   const logout = () => {
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
     setUser(null);
   };
-  //auth info return and return body
-  const authInfo = {
+
+  // Auth info return and return body
+  const authInfo: AuthContextType = {
     user,
     login,
     logout,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

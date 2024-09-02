@@ -26,7 +26,7 @@ const loginUser = async (payload: TLoginUser) => {
       const accessToken = createToken(
         jwtPayload,
         config.secret as string,
-        "7d",
+        "1d",
     );
     
     const refreshToken = createToken(
@@ -38,6 +38,7 @@ const loginUser = async (payload: TLoginUser) => {
 
     return {
         refreshToken,
+        accessToken,
         userData:userData,
     }
 }

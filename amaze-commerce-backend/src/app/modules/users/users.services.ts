@@ -9,9 +9,14 @@ const createNewUser = async (userData: TUser) => {
     const result = await User.create(userData);
     return result;
 }
-//get user details
+//get user by id
 const getUser = async (id: any) => {
     const result = await User.findById(id);
+    return result;
+}
+//find a user by email
+const getUserByEmail = async (email: string) => {
+    const result = await User.findOne({ email: email });
     return result;
 }
 //update users OTP
@@ -33,6 +38,7 @@ const updateUsersIsVerifiedState = async (email: string) => {
 export const userServices = {
     createNewUser,
     getUser,
+    getUserByEmail,
     updateUsersOTP,
     getUserOTPfromDB,
     updateUsersIsVerifiedState,

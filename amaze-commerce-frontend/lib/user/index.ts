@@ -11,6 +11,7 @@ export const registerUser = catchAsync(async (name, email: string, phone: string
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
+      cache:'no-store',
     });
   const data = await res.json();
   if (data.success) {
@@ -31,6 +32,7 @@ export const verifyEmail = catchAsync(async (OTP: string, email: string) => {
   }
 })
 
+
 //login user
 export const loginUser = catchAsync(async (email: string, password: string) => {
   const user = { email, password };
@@ -40,6 +42,8 @@ export const loginUser = catchAsync(async (email: string, password: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
+    credentials:'include',
+    cache:'no-store',
   });
   const data = await res.json();
   return {

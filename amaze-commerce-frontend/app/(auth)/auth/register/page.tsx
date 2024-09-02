@@ -1,38 +1,37 @@
 "use client";
-import { useAuth } from "@/app/provider/AuthProvider";
-import { registerUser } from "@/lib/user";
+import { loginUser, registerUser } from "@/lib/user";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
-
 export default function Register() {
-  const { login } = useAuth();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-
-  const handleRegisterUser = async (e : FormEvent) => {
+  const handleRegisterUser = async (e: FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
+
     if (password.length < 6) {
-      setError('Password should be at least 6 digits!');
+      setError("Password should be at least 6 characters!");
       return;
     }
-    else {
-      if (name && email && phone && password) {
+
+    if (name && email && phone && password) {
+      try {
         const data = await registerUser(name, email, phone, password);
         if (data?.data?.data) {
-          login(email, password);
+          console.log(data?.data?.data);
         }
-      } else {
-        setError("All fields must be filled out");
-        return;
+      } catch (error: any) {
+        setError(error?.message || "An error occurred during registration.");
       }
+    } else {
+      setError("All fields must be filled out");
     }
-};
+  };
 
   return (
     <div className="container relative mx-auto justify-center mb-20 items-center flex w-full">
@@ -58,17 +57,14 @@ export default function Register() {
         <div className="flex flex-col md:glass justify-center border-2 py-12 shadow-lg  px-8 rounded-lg items-start">
           <h3 className="text-4xl font-semibold mb-6">Create account</h3>
           <div>
-            <form
-              onSubmit={handleRegisterUser}
-              action=""
-              className="flex flex-col"
-            >
+            <form onSubmit={handleRegisterUser} className="flex flex-col">
               <label htmlFor="name" className="text-xl font-semibold mb-1">
                 Your name
               </label>
               <input
                 type="text"
-                className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <label htmlFor="email" className="text-xl font-semibold mb-1">
@@ -76,7 +72,8 @@ export default function Register() {
               </label>
               <input
                 type="email"
-                className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label htmlFor="phone" className="text-xl font-semibold mb-1">
@@ -84,7 +81,8 @@ export default function Register() {
               </label>
               <input
                 type="tel"
-                className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
               <label htmlFor="password" className="text-xl font-semibold mb-1">
@@ -92,14 +90,15 @@ export default function Register() {
               </label>
               <input
                 type="password"
-                className=" rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {
+              {error && (
                 <div className="text-red-600 mb-2">
-                  {error && <p>{error}</p>}
+                  <p>{error}</p>
                 </div>
-              }
+              )}
               <button className="text-xl font-semibold btn btn-warning">
                 Continue
               </button>

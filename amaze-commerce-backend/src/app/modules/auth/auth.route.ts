@@ -7,5 +7,6 @@ import { authControllers } from "./auth.controller";
 const router = express.Router();
 
 router.post('/login', validateRequest(authValidation.loginValidationSchema), authControllers.loginUser);
+router.get('/access-token', authControllers.newAccessToken);
 
 export const authRoutes = router;

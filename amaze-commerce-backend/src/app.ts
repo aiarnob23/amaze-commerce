@@ -5,14 +5,22 @@ import { ProductsRoutes } from "./app/modules/products/products.route";
 import { UsersRoutes } from "./app/modules/users/users.route";
 import globalErrorHandler from "./app/middlewares/globalErrorhandler";
 import { authRoutes } from "./app/modules/auth/auth.route";
+import cookieParser from "cookie-parser";
 
 
 const app: Application = express();
 
 
 // cors and middlewares for data
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 //routes 
 app.use("/api/products", ProductsRoutes);

@@ -1,9 +1,17 @@
+"use client";
 import Link from "next/link";
 import UserIcon from "@/public/icons/user.png";
 import Image from "next/image";
 import SearchIcon from "@mui/icons-material/Search";
+import { useAuth } from "@/app/provider/AuthProvider";
+import { useState } from "react";
 
 export default function NavBar() {
+  const { user } = useAuth();
+  const [userItemsVisible, setUsersItemsVisible] = useState<boolean>(false);
+  const toggleUserItems = () => {
+    setUsersItemsVisible((userItemsVisible) => !userItemsVisible);
+  };
   // Nav links
   const NavLinks = (
     <>
@@ -50,7 +58,7 @@ export default function NavBar() {
           </div>
           <Link href="/main" className="btn btn-ghost ml-16 md:ml-0 text-xl">
             <h3>
-               Amaze<span className="text-yellow-500">Com</span>
+              Amaze<span className="text-yellow-500">Com</span>
             </h3>
           </Link>
         </div>
@@ -74,9 +82,21 @@ export default function NavBar() {
         </div>
         {/* navbar end */}
         <div className="navbar-end">
-          <button className="btn btn-ghost">
+          <button onClick={toggleUserItems} className="btn btn-ghost">
             <Image src={UserIcon} alt="user" height={20} width={20} />
           </button>
+          {userItemsVisible && (
+            <div className="absolute right-0 top-12 bg-base-100 rounded-box shadow-lg z-10">
+              <ul className="menu menu-compact p-2">
+                <li>
+                  <Link href="/user/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link href="/auth/logout">Logout</Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
