@@ -2,6 +2,8 @@ import { Document, Types } from "mongoose";
 
 export interface TCartItem{
     product: Types.ObjectId;
+    title: string;
+    displayImage: string;
     quantity: number;
     price: number;
     total: number;

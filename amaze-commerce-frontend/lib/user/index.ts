@@ -15,7 +15,6 @@ export const registerUser = catchAsync(async (name, email: string, phone: string
     });
   const data = await res.json();
   if (data.success) {
-      window.location.href = "/auth/otp";
       return {
         data,
       }
@@ -36,6 +35,7 @@ export const verifyEmail = catchAsync(async (OTP: string, email: string) => {
 //login user
 export const loginUser = catchAsync(async (email: string, password: string) => {
   const user = { email, password };
+  console.log(user);
   const res = await fetch(`${SERVER_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -46,6 +46,7 @@ export const loginUser = catchAsync(async (email: string, password: string) => {
     cache:'no-store',
   });
   const data = await res.json();
+  console.log(data);
   return {
     data,
   }

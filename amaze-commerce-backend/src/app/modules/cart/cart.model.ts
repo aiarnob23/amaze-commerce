@@ -1,6 +1,5 @@
 import { model, Schema } from "mongoose";
 import { TCart, TCartItem } from "./cart.interface";
-import { number } from "zod";
 
 const cartItemSchema = new Schema<TCartItem>(
   {
@@ -8,6 +7,16 @@ const cartItemSchema = new Schema<TCartItem>(
       type: Schema.Types.ObjectId,
       ref: "Product",
       required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      trim:true,
+    },
+    displayImage: {
+      type: String,
+      required: true,
+      trim:true,
     },
     quantity: {
       type: Number,

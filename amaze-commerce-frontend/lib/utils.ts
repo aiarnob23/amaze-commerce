@@ -9,3 +9,5 @@ export const catchAsync = <T extends (...args: any[]) => Promise<any>>(fn: T) =>
     }
   };
 };
+
+

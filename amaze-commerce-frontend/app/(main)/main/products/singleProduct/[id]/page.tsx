@@ -1,3 +1,4 @@
+import AddToCart from "@/components/products/addToCart";
 import RatingComponent from "@/components/ui/rating";
 import { getProductById, getRelatedProducts } from "@/lib/e-commerce";
 import Link from "next/link";
@@ -68,55 +69,8 @@ export default async function SingleProduct({
           </div>
         </div>
         {/* add to cart div */}
-        <div className="flex flex-col gap-3 border-2 p-4 rounded-lg border-gray-3 shadow-2xl">
-          <div>
-            <p className="text-2xl font-bold">
-              <sup>$ </sup>
-              {product?.price}
-            </p>
-          </div>
-          <div>
-            <p>
-              Delivery within <span className="text-green-600">24hrs</span>
-            </p>
-          </div>
-          <div>
-            <p className="text-green-600">In Stock</p>
-          </div>
-          <div>
-            <p>{product?.stock} available</p>
-          </div>
-          <div>
-            <p>Ships from : Amaze Group</p>
-          </div>
-          <div>
-            <p>Sold by : Amaze Group</p>
-          </div>
-          <div>
-            <p>
-              Returns <span className="text-green-600">30-day</span>
-            </p>
-          </div>
-          <div>
-            <form action="">
-              <div>
-                <label htmlFor="quantity">Quantity: </label>
-                <input
-                  defaultValue={1}
-                  className=" border-2 input-sm rounded-lg border-gray-400 mb-4"
-                  type="number"
-                />
-              </div>
-              <div className="w-full">
-                <button
-                  type="submit"
-                  className="btn  bg-orange-400 w-full text-center rounded-lg text-sm"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </form>
-          </div>
+        <div >
+           <AddToCart product={product}/>
         </div>
       </div>
       <hr className="mt-[80px] border-2 border-gray-300" />

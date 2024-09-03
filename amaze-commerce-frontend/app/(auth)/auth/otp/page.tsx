@@ -1,15 +1,15 @@
 "use client";
 
-import { useAuth } from "@/app/provider/AuthProvider";
 import { verifyEmail } from "@/lib/user";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function OTP() {
-  const { user } = useAuth();
-  console.log(user);
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
   const [OTP, setOTP] = useState<string>("");
   const checkOTP = async () => {
-     verifyEmail(OTP, user?.email);
+     verifyEmail(OTP, email?email:'');
   }
   return (
     <div className="container mt-24 mb-20 mx-auto">

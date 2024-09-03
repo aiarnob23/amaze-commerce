@@ -1,6 +1,6 @@
 "use client";
-import { SERVER_BASE_URL } from "@/lib/config";
 import { loginUser } from "@/lib/user";
+import deleteCookie from "@/lib/utils/cookies";
 import {
   createContext,
   ReactNode,
@@ -13,6 +13,7 @@ interface AuthContextType {
   user: any;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  loading: any;
 }
 
 // AuthContext
@@ -24,8 +25,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     const storedUser = localStorage.getItem("user");
-    if (storedUser) setUser(JSON.parse(storedUser));
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setLoading(false);
+    };
   }, []);
 
   // login
@@ -37,6 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const token = res?.data?.data?.accessToken;
       const userData = res?.data?.data?.result;
       setUser(userData);
+      console.log(userData, token);
 
       if (!userData || !token) {
         throw new Error("Login failed: No user data or token received.");
@@ -44,6 +50,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       localStorage.setItem("accessToken", token);
       localStorage.setItem("user", JSON.stringify(userData));
+
+      return userData;
       
     } catch (error) {
       console.error("Login error:", error);
@@ -52,9 +60,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // logout
   const logout = () => {
-    sessionStorage.removeItem("token");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
+    deleteCookie({name:'refreshToken'});
     setUser(null);
   };
 
@@ -63,6 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     user,
     login,
     logout,
+    loading,
   };
 
   return (

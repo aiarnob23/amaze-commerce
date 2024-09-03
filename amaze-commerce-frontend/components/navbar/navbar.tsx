@@ -4,33 +4,59 @@ import UserIcon from "@/public/icons/user.png";
 import Image from "next/image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAuth } from "@/app/provider/AuthProvider";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function NavBar() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [userItemsVisible, setUsersItemsVisible] = useState<boolean>(false);
+  const userIconRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const toggleUserItems = () => {
-    setUsersItemsVisible((userItemsVisible) => !userItemsVisible);
+    setUsersItemsVisible((prevVisible) => !prevVisible);
   };
+
+  const handleLogOut = async () => {
+    logout();
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        !userIconRef.current?.contains(event.target as Node)
+      ) {
+        setUsersItemsVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // Nav links
   const NavLinks = (
     <>
       <li>
-        <Link href="/main/products/1">All Product</Link>
+        <Link href="/main/products/1">All Products</Link>
       </li>
       <li>
         <Link href="/auth/register">Register</Link>
       </li>
       <li>
-        <Link href="/user/cart">Cart</Link>
+        <Link href="/main/user/cart">Cart</Link>
       </li>
     </>
   );
 
   return (
     <div>
-      <div className="navbar mb-[40px] md:mb-[10px]  bg-base-200 text-[#1E2A5E] relative">
-        {/*navbar start  */}
+      <div className="navbar mb-[40px] md:mb-[10px] bg-base-200 text-[#1E2A5E] relative">
+        {/* Navbar start */}
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -62,7 +88,7 @@ export default function NavBar() {
             </h3>
           </Link>
         </div>
-        {/* search field */}
+        {/* Search field */}
         <div className="absolute ml-20 md:relative mt-[80px] md:mt-0">
           <form action="/main/searchResults" method="get">
             <input
@@ -76,24 +102,35 @@ export default function NavBar() {
             </button>
           </form>
         </div>
-        {/* navbar center */}
+        {/* Navbar center */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
         </div>
-        {/* navbar end */}
+        {/* Navbar end */}
         <div className="navbar-end">
-          <button onClick={toggleUserItems} className="btn btn-ghost">
+          <button
+            onClick={toggleUserItems}
+            ref={userIconRef}
+            className="btn btn-ghost"
+          >
             <Image src={UserIcon} alt="user" height={20} width={20} />
           </button>
           {userItemsVisible && (
-            <div className="absolute right-0 top-12 bg-base-100 rounded-box shadow-lg z-10">
+            <div
+              ref={dropdownRef}
+              className="absolute right-0 top-12 bg-base-100 rounded-box shadow-lg z-10"
+            >
               <ul className="menu menu-compact p-2">
                 <li>
-                  <Link href="/user/profile">Profile</Link>
+                  <Link href="/main/user/profile">Profile</Link>
                 </li>
-                <li>
-                  <Link href="/auth/logout">Logout</Link>
-                </li>
+                {user ? (
+                  <li>
+                    <button onClick={handleLogOut}>Logout</button>
+                  </li>
+                ) : (
+                  <Link href="/auth/login">Login</Link>
+                )}
               </ul>
             </div>
           )}

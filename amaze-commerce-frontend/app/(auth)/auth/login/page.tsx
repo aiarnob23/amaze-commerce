@@ -1,6 +1,5 @@
 "use client";
 import { useAuth } from "@/app/provider/AuthProvider";
-import { loginUser } from "@/lib/user";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
@@ -11,7 +10,10 @@ export default function Login() {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    login(email, password);
+    const res : any = await login(email, password);
+    if (res) {
+      window.location.replace('/main');
+    }
     //localStorage.setItem('accessToken', res.data.data.accessToken);
   }
   return (

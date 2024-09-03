@@ -6,6 +6,7 @@ import { UsersRoutes } from "./app/modules/users/users.route";
 import globalErrorHandler from "./app/middlewares/globalErrorhandler";
 import { authRoutes } from "./app/modules/auth/auth.route";
 import cookieParser from "cookie-parser";
+import { cartRoutes } from "./app/modules/cart/cart.route";
 
 
 const app: Application = express();
@@ -26,6 +27,7 @@ app.use(
 app.use("/api/products", ProductsRoutes);
 app.use("/api/user", UsersRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/cart", cartRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("Amaze commerce server site");
 });
