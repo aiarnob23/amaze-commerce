@@ -51,3 +51,23 @@ export const loginUser = catchAsync(async (email: string, password: string) => {
     data,
   }
 })
+
+//get local storage user
+export const getLocalUser = catchAsync(async () => {
+  const user : any = localStorage.getItem('user');
+  const res = JSON.parse(user);
+    console.log(res);
+  return res;
+
+})
+
+//get user
+export const getUser = catchAsync(async (id:any) => {
+  const res = await fetch(`${SERVER_BASE_URL}/user/${id}`)
+
+  const data = await res.json();
+  console.log(data);
+  return {
+    data,
+  };
+});

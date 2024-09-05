@@ -28,6 +28,12 @@ const createNewUser = catchAsync(async (req, res) => {
 //get user
 const getUser = catchAsync(async (req, res) => {
   const result = await userServices.getUser(req.params.id);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User fetched successfully',
+    data:result,
+  })
 });
 
 //resend otp

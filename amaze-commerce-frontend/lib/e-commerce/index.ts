@@ -1,6 +1,28 @@
+
 import { SERVER_BASE_URL } from "../config";
 
-//get popular productcts
+//add new product
+export async function addNewProduct(
+  newProduct : any
+) {
+
+  const res = await fetch(`${SERVER_BASE_URL}/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newProduct),
+    credentials: "include",
+  });
+  const data = await res.json();
+  console.log(data);
+  return {
+    data,
+  }
+}
+
+
+//get popular products
 export async function getPopularProducts() {
   const res = await fetch(`${SERVER_BASE_URL}/products?sort=-rating&limit=16`, {
     cache: "force-cache",
@@ -13,7 +35,6 @@ export async function getPopularProducts() {
 export async function getAllProducts(page: number, perPage: number) {
   const res = await fetch(
     `${SERVER_BASE_URL}/products?page=${page}&limit=${perPage}`,
-    {}
   );
   const data = await res.json();
   const products = data.data.data;
@@ -39,6 +60,40 @@ export async function getRelatedProducts(tags: any) {
   );
   const { data } = await res.json();
   return data.data;
+}
+
+//update a product
+export async function updateProduct(
+  id:any, updatedData:any
+) {
+  const res = await fetch(`${SERVER_BASE_URL}/products/update-product/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedData),
+    cache: "no-store",
+    credentials: "include",
+  });
+  const data = await res.json();
+  console.log(data);
+  return {
+    data,
+  }
+}
+
+//delete a product
+export async function deleteProduct(id: any) {
+  const res = await fetch(`${SERVER_BASE_URL}/products/delete/${id}`, 
+    {
+      method:"DELETE"
+    }
+  )
+  const data = await res.json();
+  console.log(data);
+  return {
+    data,
+  };
 }
 
 //get search results
@@ -73,9 +128,24 @@ export async function getUserCart(userId: any) {
     credentials: "include",
   });
   const data = await res.json();
-  const cartItems = data?.data?.items;
+  const cartItems = data?.data;
   return {
     cartItems,
   }
   
+}
+
+//delete item from cart 
+export async function deleteCartItem(userId:any, productId:any) {
+  const res = await fetch(`${SERVER_BASE_URL}/cart/delete-item/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({productId}),
+    cache: "no-store",
+    credentials: "include",
+  });
+  const data = await res.json();
+  console.log(data);
 }

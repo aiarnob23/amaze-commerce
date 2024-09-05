@@ -1,7 +1,6 @@
-
-import Footer from "@/components/footer/footer";
+import AdminNavbar from "@/components/admin/navbar";
+import AdminSideBar from "@/components/admin/sideBav";
 import type { Metadata } from "next";
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +14,14 @@ export default function Layout({
 }>) {
   return (
     <div>
-      {children}
-      <div className="flex justify-center items-center">
-        <p className="text-xl text-gray-500">© 2024-2026, AmazeCom.com, Inc. or its affiliates</p>
+      <AdminNavbar />
+      <div className="flex gap-12">
+        <div>
+          <AdminSideBar />
+        </div>
+        <div>
+          {children}
+        </div>
       </div>
     </div>
   );

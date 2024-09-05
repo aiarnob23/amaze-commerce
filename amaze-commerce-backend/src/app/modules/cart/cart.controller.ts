@@ -4,7 +4,7 @@ import sendResponse from "../../utils/sendResponse";
 import { productsServices } from "../products/products.service";
 import { cartServices } from "./cart.service";
 
-
+//add item to the cart
 const addProductToCart = catchAsync(async (req, res) => {
     const userId = req.params.id;
     const payload = req.body;
@@ -24,7 +24,7 @@ const addProductToCart = catchAsync(async (req, res) => {
         data:result,
     })
 })
-
+//get user based cart 
 const getUsersCart = catchAsync(async (req, res) => {
     const result = await cartServices.getUsersCart(req?.params?.id);
     sendResponse(res, {
@@ -34,8 +34,19 @@ const getUsersCart = catchAsync(async (req, res) => {
         data:result,
     })
 })
-
+//delete users item from cart
+const deleteItemFromCart = catchAsync(async (req, res) => {
+    console.log(req.params.id, req.body);
+    const result = await cartServices.deleteItemFromCart(req?.params?.id, req?.body?.productId);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Item deleted from cart',
+        data:result,
+    })
+})
 export const cartControllers = {
     addProductToCart,
     getUsersCart,
+    deleteItemFromCart,
 }

@@ -23,7 +23,7 @@ const getUsersCart = async (userId: any) => {
     return result;
 }
 //delete an item from cart
-const deleteItemFromCart = async (userId: Types.ObjectId, productId: Types.ObjectId) => {
+const deleteItemFromCart = async (userId: any, productId: any) => {
     const cart = await Cart.findOne({ user: userId });
     if (cart) {
         cart.items = cart.items.filter(

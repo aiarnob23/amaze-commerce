@@ -5,11 +5,13 @@ import { useState } from "react";
 type PaginationProps = {
   totalPages: number;
   initialPage: number;
+  pageChangeFn: string;
 };
 
 export default function Pagination({
   totalPages,
   initialPage,
+  pageChangeFn,
 }: PaginationProps) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(initialPage);
@@ -24,12 +26,26 @@ export default function Pagination({
     router.push(`/main/products/${page}`);
   };
 
+  const handleAdminProductsPageChange = (page: number) => {
+    setCurrentPage(page);
+    router.push(`/admin/products/${page}`);
+  }
+
+  const handleclick = (page :number) => {
+    if (pageChangeFn == "handlePageChange") {
+      handlePageChange(page);
+    }
+    if (pageChangeFn == "handleAdminProductsPageChange") {
+      handleAdminProductsPageChange(page);
+    }
+  }
+
   return (
     <div className="flex flex-row space-x-8 my-8">
       {pages.map((page) => (
         <button
           key={page}
-          onClick={() => handlePageChange(page)}
+          onClick={() => handleclick(page)}
           className={`btn ${
             currentPage === page ? "btn-primary" : ""
           }`}

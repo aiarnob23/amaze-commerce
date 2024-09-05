@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+
 import QueryBuilder from "../../builder/queryBuilder";
 import { productsSearchableFields } from "./products.constant";
 import { Product } from "./products.model";
@@ -29,9 +29,25 @@ const getSingleProduct = async (id: any) => {
   const result = Product.findById(id);
   return result;
 };
+//update a product
+const updateProduct = async (id: any, updatedData: any) => {
+  const result = Product.findByIdAndUpdate(id, updatedData, {new:true});
+  return result;
+}
+//delete a product
+const deleteProduct = async (id: any) => {
+  console.log('hitted service');
+  const result = await Product.findByIdAndDelete(id);
+  console.log(result);
+  return result;
+}
+
+
 //exports
 export const productsServices = {
   getProducts,
   addProduct,
   getSingleProduct,
+  updateProduct,
+  deleteProduct,
 };

@@ -14,6 +14,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   loading: any;
+  setLoading: any;
 }
 
 // AuthContext
@@ -30,8 +31,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
       setLoading(false);
-    };
+    }
   }, []);
+
 
   // login
   const login = async (email: string, password: string) => {
@@ -52,7 +54,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("user", JSON.stringify(userData));
 
       return userData;
-      
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -62,7 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
-    deleteCookie({name:'refreshToken'});
+    deleteCookie({ name: "refreshToken" });
     setUser(null);
   };
 
@@ -72,6 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     login,
     logout,
     loading,
+    setLoading,
   };
 
   return (

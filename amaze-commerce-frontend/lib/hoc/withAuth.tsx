@@ -1,25 +1,49 @@
 "use client";
+import Loading from "@/components/loading/CartLoadinSkeleton";
+import { getLocalUser } from "../user";
+import { useCallback, useEffect, useState } from "react";
 
-import { useAuth } from "@/app/provider/AuthProvider";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 export default function withAuth(Component: any) {
-    return function WithAuth(props: any) {
-        const { user ,loading} = useAuth();
-        useEffect(() => {
-            if (!user) {
-                redirect('/auth/login');
-            }
-        }, [])
-        if (loading) {
-            <div>loading ......</div>
-        }
-        
-        if (!user) {
-            return null;
-        }
+  return function WithAuth(props: any) {
 
-        return <Component {...props} />
+    const [loading, setLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<any>(null);
+
+
+    const getUserData = useCallback(async () => {
+      setLoading(true);
+      try {
+        const res = await getLocalUser();
+        setUser(res);
+        setLoading(false);
+      }
+      catch (error) {
+        console.error("failed to find user", error);
+        setLoading(false);
+      }
+    }, []);
+
+
+    useEffect(() => {
+      getUserData();
+    },[getUserData])
+
+    if (loading) {
+     return (
+       <div className="min-h-screen container mx-auto">
+         <div className="">
+           <Loading />
+         </div>
+       </div>
+     );
     }
+    
+    if (!user) {
+      window.location.replace('/auth/login');
+    }
+    
+
+    return <Component {...props} />;
+  };
 }
