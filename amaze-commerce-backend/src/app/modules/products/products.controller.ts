@@ -31,8 +31,11 @@ const addNewProduct = catchAsync(async (req, res) => {
 
 //find by id
 const getProductById = catchAsync(async (req, res) => {
+  console.log('hitted get product by id');
   const id: any = req.params.id;
-    const result = await productsServices.getSingleProduct(id);
+  console.log(id);
+  const result = await productsServices.getSingleProduct(id);
+  console.log(result);
       sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,

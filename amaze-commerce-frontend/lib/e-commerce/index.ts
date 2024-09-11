@@ -49,6 +49,7 @@ export async function getAllProducts(page: number, perPage: number) {
 export async function getProductById(id: string) {
   const res = await fetch(`${SERVER_BASE_URL}/products/single/${id}`);
   const data = await res.json();
+  console.log(data);
   return data.data;
 }
 

@@ -27,6 +27,7 @@ export default function EditProductPage({
     const getProductDetails = async () => {
       const data = await getProductById(id);
       setProduct(data);
+      console.log(data);
       if (data) {
         setName(data.name || "");
         setDescription(data.description || "");

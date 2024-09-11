@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.post('/login', validateRequest(authValidation.loginValidationSchema), authControllers.loginUser);
 router.get('/access-token', authControllers.newAccessToken);
+router.get('/cart-orders', authControllers.getOrders);
 
 export const authRoutes = router;
