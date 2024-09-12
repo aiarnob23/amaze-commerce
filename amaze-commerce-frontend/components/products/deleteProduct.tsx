@@ -1,6 +1,7 @@
 "use client";
 
-import { deleteProduct } from "@/lib/e-commerce";
+
+import { deleteProduct } from "@/lib/admin";
 import Swal from "sweetalert2";
 
 export default function DeleteProduct({id}: {id:any}) {

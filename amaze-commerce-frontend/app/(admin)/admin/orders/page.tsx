@@ -44,7 +44,7 @@ const Orders = () => {
               </tr>
             </thead>
             {orders?.data?.map((order: any) => (
-              <tbody>
+              <tbody key={order?._id}>
                 {order?.items?.map((item: any) => (
                   <tr
                     key={item?.product}
