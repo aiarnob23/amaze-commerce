@@ -1,25 +1,48 @@
+"use client";
+import { getLocalUser } from "../user";
+import { useCallback, useEffect, useState } from "react";
 
-// import { useAuth } from "@/app/provider/AuthProvider";
-// import { useRouter } from "next/router";
-// import { useEffect } from "react";
+export default function withAdminAuth(Component: any) {
+  return function WithAuth(props: any) {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<any>(null);
 
-// const withAdminAuth = (WrappedComponent: React.FC) => {
-//   return (props: any) => {
-//     const { user } = useAuth();
-//     const router = useRouter();
+    const getUserData = useCallback(async () => {
+      setLoading(true);
+      try {
+        const res = await getLocalUser();
+        setUser(res);
+        setLoading(false);
+      } catch (error) {
+        console.error("failed to find user", error);
+        setLoading(false);
+      }
+    }, []);
 
-//     useEffect(() => {
-//       if (!user || user.role !== "admin") {
-//         router.replace("/auth/login");
-//       }
-//     }, [user, router]);
+    useEffect(() => {
+      getUserData();
+    }, [getUserData]);
 
-//     if (!user || user.role !== "admin") {
-//       return null; // or a loading spinner
-//     }
+    if (loading) {
+      return (
+        <div className="min-h-screen container mx-auto">
+          <div className="">
+            Checking access...
+          </div>
+        </div>
+      );
+    }
 
-//     return <WrappedComponent {...props} />;
-//   };
-// };
+    if (!user) {
+      window.location.replace("/auth/login");
+    }
 
-// export default withAdminAuth;
+    if (user?.role == "admin") {
+       return <Component {...props} />;
+    }
+
+    window.location.replace("/auth/login");
+
+   
+  };
+}

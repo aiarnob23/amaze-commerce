@@ -70,9 +70,25 @@ const checkUsersOTP = catchAsync(async (req, res) => {
   }
 });
 
+//make admin 
+const updateRoleToAdmin = catchAsync(async (req, res) => {
+  console.log('controller req rcvd');
+  const id = req?.params?.id;
+  console.log(id);
+  const result = await userServices.updateRoleToAdmin(id);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message:"User promoted to Admin",
+    data:result,
+  })
+});
+
+
 export const userControllers = {
   createNewUser,
   getUser,
   checkUsersOTP,
   resendOTPtoUser,
+  updateRoleToAdmin,
 };

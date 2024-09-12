@@ -1,14 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getProductById, updateProduct } from "@/lib/e-commerce";
+import { getProductById } from "@/lib/e-commerce";
 import { successAlert } from "@/lib/utils/sweetAlerts";
+import { updateProduct } from "@/lib/admin";
+import withAdminAuth from "@/lib/hoc/withAdminAuth";
 
 
-export default function EditProductPage({
+const EditProductPage = ({
   params,
 }: {
   params: { id: string };
-}) {
+}) => {
   const { id } = params;
   const [product, setProduct] = useState<any>(null);
   const [name, setName] = useState<string>("");
@@ -331,3 +333,5 @@ export default function EditProductPage({
     </div>
   );
 }
+
+export default withAdminAuth(EditProductPage);

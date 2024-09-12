@@ -1,7 +1,10 @@
+"use client";
+import withAdminAuth from "@/lib/hoc/withAdminAuth";
 import { redirect } from "next/navigation";
 
    
-export default function Admin() { 
-        redirect('/admin/home');
-  
+const Admin = () => { 
+        redirect('/admin/products');
 }
+
+export default withAdminAuth(Admin);

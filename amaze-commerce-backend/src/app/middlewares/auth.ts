@@ -9,10 +9,14 @@ export const verifyToken = async(
     next:NextFunction,
 ) => {
     const token = req?.cookies?.refreshToken || null;
+    console.log(token);
     const user = await userServices.getUser(req?.params?.id);
     const email = user?.email || null;
+
+    console.log(token, email, user);
     
     if (!token || !user || !email) {
+        console.log('no token');
         return res.status(401).json({
             success: false,
             message: "Unauthorized access",
@@ -20,6 +24,7 @@ export const verifyToken = async(
         })
     }
     if (!user.isVerified) {
+        console.log('no verified');
          return res.status(401).json({
            success: false,
            message: "Email not verified",
@@ -39,6 +44,7 @@ export const verifyToken = async(
         }
     }
     catch (error) {
+        console.log('not authorized ');
         console.log(error);
         res.status(401).json({
             success: false,
@@ -47,3 +53,43 @@ export const verifyToken = async(
         })
     }
 }
+
+
+export const verifyAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req?.cookies?.refreshToken || null;
+
+
+  if (!token ) {
+    console.log("no token");
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized access",
+      redirectTo: "/auth/login",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(
+      token,
+      config.secret as string
+    ) as jwt.JwtPayload;
+    console.log(decoded);
+   
+      if (decoded?.role == 'admin') {
+      console.log('admin verification okay');
+      next();
+    }
+  } catch (error) {
+    console.log("not authorized ");
+    console.log(error);
+    res.status(401).json({
+      success: false,
+      message: "Forbidden access",
+      redirectTo: "/auth/login",
+    });
+  }
+};

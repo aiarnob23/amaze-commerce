@@ -29,7 +29,7 @@ const Cart = () => {
 
   const handleDelCartItem = async (productId: any) => {
     const res = await deleteCartItem(user?._id, productId);
-    fetchCartData(); // Refresh cart after deletion
+    fetchCartData();
   };
 
 

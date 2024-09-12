@@ -30,6 +30,20 @@ export const verifyEmail = catchAsync(async (OTP: string, email: string) => {
     window.location.href = "/";
   }
 })
+//resend OTP
+export const resendOTP = catchAsync(async (id:any) => {
+  const res = await fetch(`${SERVER_BASE_URL}/user/resend-otp/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+  const data = await res.json();
+  console.log(data);
+});
+
+
 
 
 //login user

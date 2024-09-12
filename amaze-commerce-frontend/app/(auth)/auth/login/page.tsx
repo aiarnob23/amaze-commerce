@@ -14,7 +14,6 @@ export default function Login() {
     if (res) {
       window.location.replace('/main');
     }
-    //localStorage.setItem('accessToken', res.data.data.accessToken);
   }
   return (
     <div className="container  mx-auto justify-center mb-20 items-center flex w-full">

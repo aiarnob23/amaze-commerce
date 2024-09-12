@@ -1,11 +1,13 @@
 "use client";
 
-import { verifyEmail } from "@/lib/user";
+import { useAuth } from "@/app/provider/AuthProvider";
+import { resendOTP, verifyEmail } from "@/lib/user";
 import { useSearchParams } from "next/navigation";
 import {  useState } from "react";
 
 export default function OTP() {
   const searchParams = useSearchParams();
+  const { user } = useAuth();
   const email = searchParams.get("email");
   const [OTP, setOTP] = useState<string>("");
   const checkOTP = async () => {
@@ -40,7 +42,7 @@ export default function OTP() {
         </div>
         <div>
           Having trouble?
-          <button className="btn my-6 ml-2 btn-warning  text-[16px]">
+          <button onClick={()=>resendOTP(user?._id)} className="btn my-6 ml-2 btn-warning  text-[16px]">
             Resend OTP
           </button>
         </div>

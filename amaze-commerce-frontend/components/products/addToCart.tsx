@@ -47,12 +47,12 @@ export default function AddToCart({ product }: { product: any }) {
       </div>
       <div>
         <p>
-          <span className="text-green-800 text-xl">{product.stock} </span>
+          <span className="text-green-800 text-xl">{product?.stock} </span>
           available
         </p>
       </div>
       <div>
-        <p>{product.category} category</p>
+        <p>{product?.category} category</p>
       </div>
       <div>
         <p>Ships from : Amaze Group</p>

@@ -1,17 +1,30 @@
+"use client";
 import Pagination from "@/components/pagination/pagination";
 import DeleteProduct from "@/components/products/deleteProduct";
 import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
+import withAdminAuth from "@/lib/hoc/withAdminAuth";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Products({
+const Products= ({
   params,
 }: {
   params: { productsPage: string };
-}) {
+}) => {
   const page = parseInt(params.productsPage);
   const perPage = 12;
-  const { products, totalPages } = await getAllProducts(page, perPage);
+  const [products, setProducts] = useState<any>([]);
+  const [totalPages, setTotalPages] = useState<any>();
+  useEffect(() => {
+    const handleGetProducts = async () => {
+      const { products, totalPages } = await getAllProducts(page, perPage);
+      setProducts(products);
+      setTotalPages(totalPages);
+    }
+    handleGetProducts();
+  })
+  
 
 
   return (
@@ -58,3 +71,5 @@ export default async function Products({
     </div>
   );
 }
+
+export default withAdminAuth(Products);

@@ -1,9 +1,30 @@
+"use client";
+import { useAuth } from "@/app/provider/AuthProvider";
 import { getCartOrders } from "@/lib/admin";
+import withAdminAuth from "@/lib/hoc/withAdminAuth";
+import { useCallback, useEffect, useState } from "react";
 
-export default async function Orders() {
+const Orders = () => {
   // Fetch the latest cart orders
-  const cartOrders = await getCartOrders();
-  console.log(cartOrders.data[0].items);
+  const [orders, setOrders] = useState<any>([]);
+  const { user } = useAuth();
+
+  const fetchOrders = useCallback(async () => {
+    try {
+      if (user) {
+        const data = await getCartOrders();
+         setOrders(data);
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
+  },[user])
+
+  useEffect(() => {
+    fetchOrders();
+  },[fetchOrders])
+
 
   return (
     <div>
@@ -22,23 +43,27 @@ export default async function Orders() {
                 <th>Status</th>
               </tr>
             </thead>
-              {cartOrders?.data?.map((order: any) => (
-                <tbody>
-                  {order?.items?.map((item: any) => (
-                    <tr>
-                      <th>{item?.title}</th>
-                          <td>{item.product}</td>
-                          <td>{order?._id}</td>
-                          <td>{item?.quantity}</td>
-                          <td>{item?.total}</td>
-                          <td>{order?.status}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              ))}
+            {orders?.data?.map((order: any) => (
+              <tbody>
+                {order?.items?.map((item: any) => (
+                  <tr
+                    key={item?.product}
+                  className="py-4 px-4 border-b border-gray-300">
+                    <th>{item?.title}</th>
+                    <td>{item.product}</td>
+                    <td>{order?._id}</td>
+                    <td>{item?.quantity}</td>
+                    <td>{item?.total}</td>
+                    <td>{order?.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            ))}
           </table>
         </div>
       </div>
     </div>
   );
 }
+
+export default withAdminAuth(Orders);

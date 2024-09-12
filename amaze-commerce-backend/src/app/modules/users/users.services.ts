@@ -1,12 +1,17 @@
-
 import { TUser } from "./users.interface";
 import { User } from "./users.model";
-
 
 
 //create new user
 const createNewUser = async (userData: TUser) => {
     const result = await User.create(userData);
+    return result;
+}
+//get all user
+const getAllUser = async () => {
+    console.log('service req rcvd');
+    const result = await User.find();
+    console.log(result);
     return result;
 }
 //get user by id
@@ -24,6 +29,12 @@ const updateUsersOTP = async (id:any, OTP: string) => {
     const result = await User.findByIdAndUpdate(id, { otp: OTP },{new:true});
     return result;
 }
+//update role to admin
+const updateRoleToAdmin = async (id: any) => {
+    const result = await User.findByIdAndUpdate(id, { role: "admin" }, { new: true });
+    console.log(result);
+    return result;
+}
 //get users OTP
 const getUserOTPfromDB = async (email: string) => {
     const result = await User.findOne({email:email}, { otp: 1 });
@@ -36,10 +47,12 @@ const updateUsersIsVerifiedState = async (email: string) => {
 }
 
 export const userServices = {
-    createNewUser,
-    getUser,
-    getUserByEmail,
-    updateUsersOTP,
-    getUserOTPfromDB,
-    updateUsersIsVerifiedState,
-}
+  createNewUser,
+  getUser,
+  getUserByEmail,
+  updateUsersOTP,
+  getUserOTPfromDB,
+  updateUsersIsVerifiedState,
+  getAllUser,
+  updateRoleToAdmin,
+};

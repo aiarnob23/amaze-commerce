@@ -1,25 +1,6 @@
 
 import { SERVER_BASE_URL } from "../config";
 
-//add new product
-export async function addNewProduct(
-  newProduct : any
-) {
-
-  const res = await fetch(`${SERVER_BASE_URL}/products`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newProduct),
-    credentials: "include",
-  });
-  const data = await res.json();
-  console.log(data);
-  return {
-    data,
-  }
-}
 
 
 //get popular products
@@ -63,39 +44,6 @@ export async function getRelatedProducts(tags: any) {
   return data.data;
 }
 
-//update a product
-export async function updateProduct(
-  id:any, updatedData:any
-) {
-  const res = await fetch(`${SERVER_BASE_URL}/products/update-product/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedData),
-    cache: "no-store",
-    credentials: "include",
-  });
-  const data = await res.json();
-  console.log(data);
-  return {
-    data,
-  }
-}
-
-//delete a product
-export async function deleteProduct(id: any) {
-  const res = await fetch(`${SERVER_BASE_URL}/products/delete/${id}`, 
-    {
-      method:"DELETE"
-    }
-  )
-  const data = await res.json();
-  console.log(data);
-  return {
-    data,
-  };
-}
 
 //get search results
 export async function getSearchResults(searchTerm: string) {
@@ -122,7 +70,7 @@ export async function addToCart(userId: any, productId: any,title:string, displa
     console.log(data);
 }
 
-//get user cart data
+//get user cart data (based on user id)
 export async function getUserCart(userId: any) {
   const res = await fetch(`${SERVER_BASE_URL}/cart/get-user-cart/${userId}`, {
     cache: "no-store",

@@ -50,6 +50,9 @@ export default function NavBar() {
       <li>
         <Link href="/main/user/cart">Cart</Link>
       </li>
+      <li>
+        <Link href="/admin/products">Admin home</Link>
+      </li>
     </>
   );
 

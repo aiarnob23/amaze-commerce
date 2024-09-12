@@ -74,8 +74,22 @@ const getOrders = catchAsync(async (req, res) => {
   });
 });
 
+//get all users
+const getAllUsers = catchAsync(async (req, res) => {
+  console.log('controller req received');
+  const result = await userServices.getAllUser();
+  console.log('controller res: ', result);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Users data fetched successfully",
+    data:result,
+  })
+})
+
 export const authControllers = {
   loginUser,
   newAccessToken,
   getOrders,
+  getAllUsers,
 };

@@ -43,12 +43,14 @@ export default function AdminNavbar() {
   return (
     <div>
       <div className="navbar  bg-base-200 text-[#1E2A5E] relative">
-              <div className="navbar-start">
-                  
-         </div>
+        <div className="navbar-start"></div>
         {/* Navbar center */}
         <div className="navbar-center hidden lg:flex">
-          <h2 className="text-2xl font-bold">Amaze<span className="text-yellow-500">Com</span></h2>
+          <Link href='/main'>
+            <h2 className="text-2xl font-bold">
+              Amaze<span className="text-yellow-500">Com</span>
+            </h2>
+          </Link>
         </div>
         {/* Navbar end */}
         <div className="navbar-end">

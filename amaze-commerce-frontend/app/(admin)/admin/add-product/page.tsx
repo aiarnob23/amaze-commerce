@@ -2,9 +2,11 @@
 import { useState } from "react";
 
 import { successAlert } from "@/lib/utils/sweetAlerts";
-import { addNewProduct } from "@/lib/e-commerce";
+import { addNewProduct } from "@/lib/admin";
+import withAdminAuth from "@/lib/hoc/withAdminAuth";
 
-export default function EditProductPage() {
+
+const EditProductPage =()=> {
   const [product, setProduct] = useState<any>(null);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -341,3 +343,5 @@ export default function EditProductPage() {
     </div>
   );
 }
+
+export default withAdminAuth(EditProductPage);
