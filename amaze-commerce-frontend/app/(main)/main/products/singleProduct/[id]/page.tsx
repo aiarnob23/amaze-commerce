@@ -1,5 +1,4 @@
 import AddToCart from "@/components/products/addToCart";
-import RatingComponent from "@/components/ui/rating";
 import { getProductById, getRelatedProducts } from "@/lib/e-commerce";
 import Link from "next/link";
 
@@ -31,10 +30,9 @@ export default async function SingleProduct({
             <p className="text-xl text-gray-600 mb-3">{product?.description}</p>
             <div>
               <div className="flex justify-center items-center gap-2">
-                <p className="text-xl text-gray-500 mb-2">{product?.rating}</p>
-                <div>
-                  <RatingComponent rating={product?.rating} />
-                </div>
+                <p className="text-xl text-gray-500 mb-2">
+                  Rating : <span className="text-amber-600">{product?.rating}</span>
+                </p>
               </div>
             </div>
             <div>
@@ -69,8 +67,8 @@ export default async function SingleProduct({
           </div>
         </div>
         {/* add to cart div */}
-        <div >
-           <AddToCart product={product}/>
+        <div>
+          <AddToCart product={product} />
         </div>
       </div>
       <hr className="mt-[80px] border-2 border-gray-300" />
