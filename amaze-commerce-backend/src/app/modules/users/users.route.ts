@@ -9,7 +9,7 @@ router.post('/create-user', validateRequest(zodUserValidationSchema.newUserValid
 router.get(`/:id`, userControllers.getUser);
 router.patch(`/resend-otp/:id`, userControllers.resendOTPtoUser);
 router.get(`/check-otp/:email`, userControllers.checkUsersOTP);
-router.patch(`/make-admin/:id`,verifyAdmin, userControllers.updateRoleToAdmin);
+router.patch(`/make-admin/:id`, userControllers.updateRoleToAdmin);
 
 
 export const UsersRoutes = router;
