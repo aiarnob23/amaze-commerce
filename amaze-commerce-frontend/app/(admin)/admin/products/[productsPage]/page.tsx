@@ -1,31 +1,33 @@
 "use client";
+import { useAuth } from "@/app/provider/AuthProvider";
 import Pagination from "@/components/pagination/pagination";
 import DeleteProduct from "@/components/products/deleteProduct";
 import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
 import withAdminAuth from "@/lib/hoc/withAdminAuth";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const Products= ({
-  params,
-}: {
-  params: { productsPage: string };
-}) => {
+const Products = ({ params }: { params: { productsPage: string } }) => {
+  const { user } = useAuth();
   const page = parseInt(params.productsPage);
   const perPage = 12;
   const [products, setProducts] = useState<any>([]);
   const [totalPages, setTotalPages] = useState<any>();
-  useEffect(() => {
-    const handleGetProducts = async () => {
+
+  const fetchProducts = useCallback(async () => {
+    try {
       const { products, totalPages } = await getAllProducts(page, perPage);
       setProducts(products);
       setTotalPages(totalPages);
+    } catch (error) {
+      console.log(error);
     }
-    handleGetProducts();
-  })
-  
+  }, [user]);
 
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts, user]);
 
   return (
     <div className="container mt-2 mx-auto min-h-screen">
@@ -53,7 +55,7 @@ const Products= ({
                   </button>
                 </Link>
                 <div>
-                  <DeleteProduct id={product?._id}/>
+                  <DeleteProduct id={product?._id} />
                 </div>
               </div>
             </div>
@@ -70,6 +72,6 @@ const Products= ({
       </div>
     </div>
   );
-}
+};
 
 export default withAdminAuth(Products);

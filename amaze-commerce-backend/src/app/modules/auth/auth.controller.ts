@@ -15,18 +15,11 @@ const loginUser = catchAsync(async (req, res) => {
   );
   const { password, ...result } = (userData as any)._doc;
 
-  res.cookie("refreshToken", refreshToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-    maxAge: 12 * 24 * 60 * 60 * 1000,
-  });
-
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
     message: "Login is successfull",
-    data: { result, accessToken },
+    data: { result, accessToken , refreshToken},
   });
 });
 

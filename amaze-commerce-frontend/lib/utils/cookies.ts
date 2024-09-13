@@ -6,9 +6,17 @@ interface DeleteData {
   name: string;
 }
 
-async function deleteCookie(data: DeleteData): Promise<void> {
+export async function deleteCookie(data: DeleteData): Promise<void> {
   const { name } = data;
   cookies().set(name, "", { maxAge: 0 });
 }
 
-export default deleteCookie;
+
+export async function setCookie(data : any) {
+  cookies().set({
+    name: 'refreshToken',
+    value: data,
+    httpOnly: true,
+    path:'/'
+  })
+}
