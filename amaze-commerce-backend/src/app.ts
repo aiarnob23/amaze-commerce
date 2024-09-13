@@ -17,7 +17,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://amaze-commerce-client.vercel.app",
+    origin: [
+      "https://amaze-commerce-client.vercel.app",
+      "http://localhost:3000",
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })

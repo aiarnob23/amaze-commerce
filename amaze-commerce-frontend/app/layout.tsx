@@ -7,8 +7,8 @@ import { ReactNode } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "E-commerce app",
-  description: "E-commerce for fast delivery with lower price",
+  title: "Amaze E-commerce app",
+  description: "Amaze E-commerce for fast delivery at lower price. Discount is available. Secured payment system.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

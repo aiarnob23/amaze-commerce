@@ -29,7 +29,7 @@ export default function Categories() {
             {/* Explore Button */}
             <div className="absolute border-2 w-[90px] rounded-lg bg-gray-700 bg-opacity-70 bottom-4 text-start ml-2 z-20">
               <button
-                className="lowercase text-yellow-300 rounded-lg text-xl"
+                className="lowercase text-yellow-300 px-2 py-1 rounded-lg text-xl"
               >
                 Explore
               </button>
