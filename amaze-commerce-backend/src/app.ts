@@ -18,8 +18,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://amaze-commerce-client.vercel.app",
-      "http://localhost:3000",
+      "https://amaze-commerce-front.vercel.app",
+      // "http://localhost:3000",
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
