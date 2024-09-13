@@ -22,8 +22,8 @@ export default function Categories() {
             <Image
               src={category.image}
               alt={category.name}
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              style={{objectFit:'cover'}}
               className="rounded-lg"
             />
 
