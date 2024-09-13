@@ -1,6 +1,7 @@
 "use client";
 import { loginUser } from "@/lib/user";
-import { deleteCookie, setCookie } from "@/lib/utils/cookies";
+import { deleteCookie } from "@/lib/utils/cookies";
+
 import {
   createContext,
   ReactNode,
@@ -42,7 +43,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("accessToken");
       const res = await loginUser(email, password);
       const token = res?.data?.data?.accessToken;
-      const refreshToken = res?.data?.data?.refreshToken;
       const userData = res?.data?.data?.result;
       setUser(userData);
       console.log(userData, token);
@@ -51,7 +51,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error("Login failed: No user data or token received.");
       }
 
-      setCookie(refreshToken);
       localStorage.setItem("accessToken", token);
       localStorage.setItem("user", JSON.stringify(userData));
 
