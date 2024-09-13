@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@mui/material";
 import { categories } from "./categoriesList";
 import Link from "next/link";
 
@@ -29,12 +28,11 @@ export default function Categories() {
 
             {/* Explore Button */}
             <div className="absolute border-2 w-[90px] rounded-lg bg-gray-700 bg-opacity-70 bottom-4 text-start ml-2 z-20">
-              <Button
-                sx={{ textTransform: "none" }}
+              <button
                 className="lowercase text-yellow-300 rounded-lg text-xl"
               >
                 Explore
-              </Button>
+              </button>
             </div>
           </Link>
         ))}
