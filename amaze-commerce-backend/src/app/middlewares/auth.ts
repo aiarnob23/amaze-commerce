@@ -8,12 +8,12 @@ export const verifyToken = async(
     res: Response,
     next:NextFunction,
 ) => {
-    const token = req?.cookies?.refreshToken || null;
-    console.log(token);
+  const token = req?.headers?.authorization || null; 
+    console.log(' authorization ', token);
     const user = await userServices.getUser(req?.params?.id);
     const email = user?.email || null;
 
-    console.log(token, email, user);
+    console.log('verify token ',token, email, user);
     
     if (!token || !user || !email) {
         console.log('no token');
@@ -60,7 +60,7 @@ export const verifyAdmin = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req?.cookies?.refreshToken || null;
+  const token = req?.headers?.authorization || null;
 
 
   if (!token ) {

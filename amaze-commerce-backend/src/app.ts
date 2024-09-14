@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: [ "https://amaze-commerce-front.vercel.app"],
+    origin: ["https://amaze-commerce-front.vercel.app"],
     credentials: true,
   })
 );

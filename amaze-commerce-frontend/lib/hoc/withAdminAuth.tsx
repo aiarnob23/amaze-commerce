@@ -16,6 +16,7 @@ export default function withAdminAuth(Component: any) {
       } catch (error) {
         console.error("failed to find user", error);
         setLoading(false);
+        window.location.replace('/auth/login');
       }
     }, []);
 
@@ -41,8 +42,9 @@ export default function withAdminAuth(Component: any) {
        return <Component {...props} />;
     }
 
-    window.location.replace("/auth/login");
-
+    if (user?.role != "admin") {
+      window.location.replace('/auth/login');
+   }
    
   };
 }

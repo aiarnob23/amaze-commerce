@@ -72,7 +72,13 @@ export async function addToCart(userId: any, productId: any,title:string, displa
 
 //get user cart data (based on user id)
 export async function getUserCart(userId: any) {
+  const accessToken = localStorage.getItem('accessToken');
   const res = await fetch(`${SERVER_BASE_URL}/cart/get-user-cart/${userId}`, {
+    method: "GET",
+    headers: {
+      'Authorization': `${accessToken}`,
+      'Content-Type': 'application/json'
+    },
     cache: "no-store",
     credentials: "include",
   });

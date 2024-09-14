@@ -70,9 +70,7 @@ export const loginUser = catchAsync(async (email: string, password: string) => {
 export const getLocalUser = catchAsync(async () => {
   const user : any = localStorage.getItem('user');
   const res = JSON.parse(user);
-    console.log(res);
   return res;
-
 })
 
 //get user

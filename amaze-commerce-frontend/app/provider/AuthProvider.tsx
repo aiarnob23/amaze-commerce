@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const token = res?.data?.data?.accessToken;
       const userData = res?.data?.data?.result;
       setUser(userData);
-      console.log(userData, token);
+
 
       if (!userData || !token) {
         throw new Error("Login failed: No user data or token received.");
