@@ -5,6 +5,7 @@ import DeleteProduct from "@/components/products/deleteProduct";
 import BasicBreadcrumbs from "@/components/ui/breadcrumbs";
 import { getAllProducts } from "@/lib/e-commerce";
 import withAdminAuth from "@/lib/hoc/withAdminAuth";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
@@ -23,7 +24,7 @@ const Products = ({ params }: { params: { productsPage: string } }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [user]);
+  },[page]);
 
   useEffect(() => {
     fetchProducts();
@@ -40,8 +41,8 @@ const Products = ({ params }: { params: { productsPage: string } }) => {
         {products.map((product: any) => (
           <div key={product?._id} className="card bg-base-100 w-96 shadow-xl">
             <figure className="px-10 pt-10">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+              <Image
+                src={product?.displayImage}
                 alt="Shoes"
                 className="rounded-xl"
               />

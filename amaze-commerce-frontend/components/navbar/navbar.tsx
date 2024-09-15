@@ -38,7 +38,7 @@ export default function NavBar() {
     };
   }, []);
 
-  // Nav links
+  // Nav links with admin link conditionally rendered
   const NavLinks = (
     <>
       <li>
@@ -50,9 +50,11 @@ export default function NavBar() {
       <li>
         <Link href="/main/user/cart">Cart</Link>
       </li>
-      <li>
-        <Link href="/admin/products">Admin</Link>
-      </li>
+      {user?.role === "admin" && (
+        <li>
+          <Link href="/admin/products">Admin</Link>
+        </li>
+      )}
     </>
   );
 
@@ -107,7 +109,9 @@ export default function NavBar() {
         </div>
         {/* Navbar center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal font-semibold px-1">{NavLinks}</ul>
+          <ul className="menu menu-horizontal font-semibold px-1">
+            {NavLinks}
+          </ul>
         </div>
         {/* Navbar end */}
         <div className="navbar-end">

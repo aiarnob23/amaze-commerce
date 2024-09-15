@@ -69,7 +69,9 @@ export async function addToCart(userId: any, productId: any, title: string, disp
     credentials: "include",
   });
     const data = await res.json();
-    console.log(data);
+  return {
+    data,
+    }
 }
 
 //get user cart data (based on user id)

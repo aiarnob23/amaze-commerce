@@ -1,6 +1,7 @@
 "use client";
 
 import { getSearchResults } from "@/lib/e-commerce";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -35,9 +36,10 @@ export default function SearchResultsClient() {
                   key={product._id}
                 >
                   <div>
-                    <img
+                    <Image
                       src={product.displayImage}
-                      className="h-[300px] w-[300px]"
+                      height={300}
+                      width={300}
                       alt={product.name}
                     />
                   </div>
@@ -48,7 +50,7 @@ export default function SearchResultsClient() {
             </div>
           </div>
         ) : (
-           <p>No products found</p>
+           <p></p>
         )}
     </div>
   );

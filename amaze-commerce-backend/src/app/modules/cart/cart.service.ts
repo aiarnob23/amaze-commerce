@@ -12,16 +12,30 @@ const addToCart = async (
   total: number
 ) => {
   let cart = await Cart.findOne({ user: userId });
+
   if (cart) {
-    cart.items.push({
-      product: productId,
-      title,
-      displayImage,
-      quantity: quantity,
-      price,
-      total,
-    });
+    // Check if the product already exists in the cart
+    const existingProductIndex = cart.items.findIndex((item) =>
+      item.product.equals(productId)
+    );
+
+    if (existingProductIndex >= 0) {
+      // Product exists, increase the quantity and update the total
+      cart.items[existingProductIndex].quantity += quantity;
+      cart.items[existingProductIndex].total += total;
+    } else {
+      // Product doesn't exist, add a new item
+      cart.items.push({
+        product: productId,
+        title,
+        displayImage,
+        quantity,
+        price,
+        total,
+      });
+    }
   } else {
+    // Create a new cart if it doesn't exist for the user
     cart = new Cart({
       user: userId,
       items: [
@@ -29,10 +43,10 @@ const addToCart = async (
       ],
     });
   }
+
   const result = await cart.save();
   return result;
 };
-
 const getUsersCart = async (userId: any) => {
   const result = await Cart.findOne({ user: userId });
   return result;

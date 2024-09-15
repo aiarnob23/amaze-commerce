@@ -1,5 +1,6 @@
 import AddToCart from "@/components/products/addToCart";
 import { getProductById, getRelatedProducts } from "@/lib/e-commerce";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function SingleProduct({
@@ -19,9 +20,10 @@ export default async function SingleProduct({
         {/* info */}
         <div className="flex gap-10 h-full">
           <div>
-            <img
+            <Image
+              height={400}
+              width={400}
               src={product?.displayImage}
-              className="h-[400px] w-[400px] "
               alt={product?.name}
             />
           </div>
@@ -31,30 +33,21 @@ export default async function SingleProduct({
             <div>
               <div className="flex justify-center items-center gap-2">
                 <p className="text-xl text-gray-500 mb-2">
-                  Rating : <span className="text-amber-600">{product?.rating}</span>
+                  Rating:{" "}
+                  <span className="text-amber-600">{product?.rating}</span>
                 </p>
               </div>
             </div>
             <div>
-              <div>
-                <div className="flex text-xl mb-2 font-medium text-gray-600 gap-3">
-                  {product?.tags?.map((tag: string, index: number) => (
-                    <p key={index}>{tag} |</p>
-                  ))}
-                </div>
+              <div className="flex text-xl mb-2 font-medium text-gray-600 gap-3">
+                {product?.tags?.join(" | ")}
               </div>
               <p className="text-xl text-gray-600 font-semibold mb-2">
                 $ {product?.price}
               </p>
               <div className="flex gap-2 text-xl text-gray-700 mb-2">
                 color:
-                <div className="flex gap-2">
-                  {product?.color.map((color: string, index: number) => (
-                    <p key={index} className="">
-                      {color} |
-                    </p>
-                  ))}
-                </div>
+                <div className="flex gap-2">{product?.color.join(" | ")}</div>
               </div>
             </div>
 
@@ -64,6 +57,20 @@ export default async function SingleProduct({
                 {product?.brand}
               </p>
             </div>
+
+            {/* More about product section */}
+            {product?.about && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold text-gray-600 mb-4">
+                  More about product:
+                </h3>
+                <ul className="list-disc list-inside text-lg text-gray-600">
+                  {product.about.map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         {/* add to cart div */}
@@ -71,8 +78,10 @@ export default async function SingleProduct({
           <AddToCart product={product} />
         </div>
       </div>
+
       <hr className="mt-[80px] border-2 border-gray-300" />
-      {/* products you may like div */}
+
+      {/* Related products section */}
       {relatedProducts && (
         <div className="mt-14">
           <h2 className="text-gray-600 font-semibold text-xl ">
@@ -86,9 +95,10 @@ export default async function SingleProduct({
                 key={product._id}
               >
                 <div>
-                  <img
+                  <Image
                     src={product.displayImage}
-                    className="h-[300px] w-[300px]"
+                    height={300}
+                    width={300}
                     alt={product.name}
                   />
                 </div>

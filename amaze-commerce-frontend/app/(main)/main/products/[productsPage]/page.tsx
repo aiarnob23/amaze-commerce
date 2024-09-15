@@ -1,6 +1,7 @@
 import Pagination from "@/components/pagination/pagination";
 import { getAllProducts } from "@/lib/e-commerce";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Products({
   params,
@@ -24,11 +25,15 @@ export default async function Products({
             key={product._id}
             className="card bg-base-100 w-96 shadow-xl"
           >
-            <figure className="px-10 pt-10">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
+            <figure className="px-10 pt-10 relative h-[300px]">
+              {" "}
+              {/* Fixed height for consistent layout */}
+              <Image
+                src={product.displayImage}
+                alt={product.name}
                 className="rounded-xl"
+                fill={true}
+                style={{ objectFit: "cover" }} // Ensures image covers container without distortion
               />
             </figure>
             <div className="card-body items-center text-center">
@@ -38,12 +43,13 @@ export default async function Products({
           </Link>
         ))}
       </div>
+
       {/* pagination div */}
       <div>
         <Pagination
           totalPages={totalPages}
           initialPage={page}
-          pageChangeFn="handlePageChange"
+          pageChangeFn="handlePageChange" // Use the callback function
         />
       </div>
     </div>

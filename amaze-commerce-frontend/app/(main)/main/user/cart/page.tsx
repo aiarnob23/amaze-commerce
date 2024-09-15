@@ -2,6 +2,7 @@
 import { useAuth } from "@/app/provider/AuthProvider";
 import { deleteCartItem, getUserCart } from "@/lib/e-commerce";
 import withAuth from "@/lib/hoc/withAuth";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
@@ -47,7 +48,7 @@ const Cart = () => {
                 key={item._id}
               >
                 <div>
-                  <img
+                  <Image
                     height={300}
                     width={300}
                     alt="product-image"

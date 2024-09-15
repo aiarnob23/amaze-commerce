@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/app/provider/AuthProvider";
 import { addToCart } from "@/lib/e-commerce";
+import { successAlert } from "@/lib/utils/sweetAlerts";
 import { useState } from "react";
 
 export default function AddToCart({ product }: { product: any }) {
@@ -26,6 +27,9 @@ export default function AddToCart({ product }: { product: any }) {
       return;
     } else {
       const res = await addToCart(user?._id, id, product?.name, product?.displayImage, quantity);
+      if (res?.data?.success) {
+        successAlert('Item added to cart');
+      }
     }
   };
 

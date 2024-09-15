@@ -22,7 +22,7 @@ export default function Categories() {
               src={category.image}
               alt={category.name}
               fill={true}
-              style={{objectFit:'cover'}}
+              style={{objectFit:'fill'}}
               className="rounded-lg"
             />
 
