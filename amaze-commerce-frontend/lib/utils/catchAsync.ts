@@ -1,4 +1,6 @@
-export const catchAsync = <T extends (...args: any[]) => Promise<any>>(fn: T) => {
+export const catchAsync = <T extends (...args: any[]) => Promise<any>>(
+  fn: T
+) => {
   return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
     try {
       return await fn(...args);
@@ -9,5 +11,3 @@ export const catchAsync = <T extends (...args: any[]) => Promise<any>>(fn: T) =>
     }
   };
 };
-
-

@@ -51,7 +51,7 @@ export default function NavBar() {
         <Link href="/main/user/cart">Cart</Link>
       </li>
       <li>
-        <Link href="/admin/products">Admin home</Link>
+        <Link href="/admin/products">Admin</Link>
       </li>
     </>
   );
@@ -107,7 +107,7 @@ export default function NavBar() {
         </div>
         {/* Navbar center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
+          <ul className="menu menu-horizontal font-semibold px-1">{NavLinks}</ul>
         </div>
         {/* Navbar end */}
         <div className="navbar-end">
@@ -123,10 +123,12 @@ export default function NavBar() {
               ref={dropdownRef}
               className="absolute right-0 top-12 bg-base-100 rounded-box shadow-lg z-10"
             >
-              <ul className="menu menu-compact p-2">
-                <li>
-                  <Link href="/main/user/profile">Profile</Link>
-                </li>
+              <ul className="menu text-xl menu-compact p-2">
+                {user && (
+                  <li>
+                    <Link href="/main/user/profile">Profile</Link>
+                  </li>
+                )}
                 {user ? (
                   <li>
                     <button onClick={handleLogOut}>Logout</button>

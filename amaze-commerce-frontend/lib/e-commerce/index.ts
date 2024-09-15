@@ -55,16 +55,18 @@ export async function getSearchResults(searchTerm: string) {
 }
 
 //add product to cart
-export async function addToCart(userId: any, productId: any,title:string, displayImage:string, quantity: number) {
+export async function addToCart(userId: any, productId: any, title: string, displayImage: string, quantity: number) {
+  const accessToken = localStorage.getItem("accessToken");
   const payload = { productId,title,displayImage, quantity };
   const res = await fetch(`${SERVER_BASE_URL}/cart/add-to-cart/${userId}`, {
     method: "POST",
     headers: {
+      Authorization: `${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
     cache: "no-store",
-    credentials:"include",
+    credentials: "include",
   });
     const data = await res.json();
     console.log(data);
@@ -91,16 +93,26 @@ export async function getUserCart(userId: any) {
 }
 
 //delete item from cart 
-export async function deleteCartItem(userId:any, productId:any) {
+export async function deleteCartItem(userId: any, productId: any) {
+  try {
+    const accessToken = localStorage.getItem('accessToken');
   const res = await fetch(`${SERVER_BASE_URL}/cart/delete-item/${userId}`, {
     method: "PATCH",
     headers: {
+      Authorization: `${accessToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({productId}),
+    body: JSON.stringify({ productId }),
     cache: "no-store",
     credentials: "include",
   });
-  const data = await res.json();
-  console.log(data);
+    const data = await res.json();
+    if (data?.redirectTo) {
+      window.location.replace(`${data.redirectTo}`);
+    }
+  console.log('response ' ,data);
+  }
+  catch (error) {
+    console.log(error);
+  }
 }

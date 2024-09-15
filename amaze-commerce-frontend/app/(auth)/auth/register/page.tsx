@@ -1,6 +1,6 @@
 "use client";
-import { useAuth } from "@/app/provider/AuthProvider";
-import {  registerUser } from "@/lib/user";
+
+import { registerUser } from "@/lib/user";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
@@ -10,11 +10,11 @@ export default function Register() {
   const [phone, setPhone] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const { login, logout } = useAuth();
+
 
   const handleRegisterUser = async (e: FormEvent) => {
     e.preventDefault();
-    logout();
+    //logout();
     setError("");
 
     if (password.length < 6) {
@@ -26,13 +26,7 @@ export default function Register() {
       try {
         const data = await registerUser(name, email, phone, password);
         if (data?.data?.data) {
-          const loginResponse: any = await login(email, password);
-          console.log(loginResponse);
-          if (loginResponse) {
-            window.location.replace(`/auth/otp?email=${email}`);
-          } else {
-            window.location.replace("/auth/login");
-          }
+          window.location.replace(`/auth/otp?email=${email}`);
         }
       } catch (error: any) {
         setError(error?.message || "An error occurred during registration.");

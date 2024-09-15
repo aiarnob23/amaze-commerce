@@ -37,24 +37,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
   // login
-  const login = async (email: string, password: string) => {
+  const login = async (userData : any, token : any) => {
     try {
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
-      const res = await loginUser(email, password);
-      const token = res?.data?.data?.accessToken;
-      const userData = res?.data?.data?.result;
       setUser(userData);
-
-
-      if (!userData || !token) {
-        throw new Error("Login failed: No user data or token received.");
-      }
-
+      console.log('user set up successfull');
       localStorage.setItem("accessToken", token);
       localStorage.setItem("user", JSON.stringify(userData));
-
-      return userData;
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -66,6 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("user");
     deleteCookie({ name: "refreshToken" });
     setUser(null);
+    window.location.replace('/auth/login');
   };
 
   // Auth info return and return body
@@ -75,6 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
     loading,
     setLoading,
+
   };
 
   return (

@@ -1,4 +1,6 @@
+import httpStatus from "http-status";
 import config from "../../config";
+import AppError from "../../error/AppError";
 import { User } from "../users/users.model";
 import { TLoginUser } from "./auth.interface";
 import { createToken } from "./auth.utils";
@@ -9,12 +11,18 @@ const loginUser = async (payload: TLoginUser) => {
     const userData = await User.isUserExistsByEmail(payload.email);
 
     if (!userData) {
-        throw new Error('This user is not found!');
+        throw new AppError(
+            httpStatus.NOT_ACCEPTABLE,
+            'Email not registered yet!',
+        );
     }
 
     //checking if the password is correct
     if (!(await User.isPasswordMatched(payload?.password, userData?.password))) {
-        throw new Error('Incorrect password')
+         throw new AppError(
+           httpStatus.NOT_ACCEPTABLE,
+           "Wrong password!"
+         );
     }
    
     //create token and send to the client
