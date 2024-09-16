@@ -26,7 +26,6 @@ export default async function Products({
             className="card bg-base-100 w-96 shadow-xl"
           >
             <figure className="px-10 pt-10 relative h-[300px]">
-              {" "}
               {/* Fixed height for consistent layout */}
               <Image
                 src={product.displayImage}

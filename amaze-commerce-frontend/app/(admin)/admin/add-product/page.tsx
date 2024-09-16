@@ -6,8 +6,7 @@ import { addNewProduct } from "@/lib/admin";
 import withAdminAuth from "@/lib/hoc/withAdminAuth";
 
 
-const EditProductPage =()=> {
-  const [product, setProduct] = useState<any>(null);
+const AddProductPage =()=> {
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number | string>("");
@@ -112,8 +111,9 @@ const EditProductPage =()=> {
   };
 
   return (
-    <div className=" py-12 ml-16 border-2 px-12 flex rounded-lg shadow-md justify-center items-center  container mx-auto my-10">
+    <div className=" py-12 ml-16 border-2 px-12 flex rounded-lg shadow-lg shadow-gray-400 justify-center items-center  container mx-auto my-10">
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <h3 className="text-3xl font-bold text-blue-900 antialiased">Add new Product</h3>
         {/* Name Field */}
         <label className="text-xl font-semibold text-gray-600" htmlFor="name">
           Name:
@@ -155,7 +155,7 @@ const EditProductPage =()=> {
 
         {/* About Section */}
         <label className="text-xl font-semibold text-gray-600" htmlFor="about">
-          About:
+          More About Product:
         </label>
         {about.map((aboutText, index) => (
           <div key={index} className="flex items-center gap-2">
@@ -165,7 +165,7 @@ const EditProductPage =()=> {
               type="text"
               value={aboutText}
               onChange={(e) => handleAboutChange(index, e.target.value)}
-              placeholder="Add details about the product"
+              placeholder="Add more details about the product"
             />
             <button
               type="button"
@@ -344,4 +344,4 @@ const EditProductPage =()=> {
   );
 }
 
-export default withAdminAuth(EditProductPage);
+export default withAdminAuth(AddProductPage);

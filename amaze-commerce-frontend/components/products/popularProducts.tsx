@@ -14,7 +14,14 @@ export default async function PopularProducts() {
             className="h-[200px] w-[200px] shadow-md shadow-stone-300 border-[1px] rounded-lg flex justify-center items-center p-2"
             key={product.userId}
           >
-            <p className="text-gray-500 text-xl antialiased"><Image src={product.displayImage} alt="" /></p>
+            <p className="text-gray-500 text-xl antialiased">
+              <Image
+                src={product?.displayImage}
+                alt={product?.name}
+                height={200}
+                width={200}
+              />
+            </p>
           </Link>
         ))}
       </div>

@@ -26,6 +26,8 @@ export default function Slider() {
           <div className="md:w-1/2 flex justify-center items-center">
             <div className="h-[500px] w-[600px]">
               <Image
+                height={500}
+                width={600}
                 src={KitchenWare}
                 alt="kitchenware"
                 className="h-full w-full object-cover rounded-lg"
@@ -56,6 +58,8 @@ export default function Slider() {
           <div className="md:w-1/2 flex justify-center items-center">
             <div className="h-[500px] w-[600px]">
               <Image
+                height={500}
+                width={600}
                 src={furniture}
                 alt="furniture"
                 className="h-full w-full object-cover rounded-lg"
@@ -86,6 +90,8 @@ export default function Slider() {
           <div className="md:w-1/2 flex justify-center items-center">
             <div className="h-[500px] w-[600px]">
               <Image
+                height={500}
+                width={600}
                 src={gaming}
                 alt="gaming"
                 className="h-full w-full object-cover rounded-lg"

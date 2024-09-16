@@ -12,29 +12,43 @@ export default function Register() {
   const [error, setError] = useState<string>("");
 
 
-  const handleRegisterUser = async (e: FormEvent) => {
-    e.preventDefault();
-    //logout();
-    setError("");
+const handleRegisterUser = async (e: FormEvent) => {
+  e.preventDefault();
+  setError("");
 
-    if (password.length < 6) {
-      setError("Password should be at least 6 characters!");
-      return;
-    }
+  // Check for minimum length
+  if (password.length < 6) {
+    setError("Password should be at least 6 characters long!");
+    return;
+  }
 
-    if (name && email && phone && password) {
-      try {
-        const data = await registerUser(name, email, phone, password);
-        if (data?.data?.data) {
-          window.location.replace(`/auth/otp?email=${email}`);
-        }
-      } catch (error: any) {
-        setError(error?.message || "An error occurred during registration.");
+  // Check for at least one uppercase letter and one symbol
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasSymbol = /[\W_]/.test(password);
+
+  if (!hasUppercase) {
+    setError("Password must contain at least one uppercase letter!");
+    return;
+  }
+
+  if (!hasSymbol) {
+    setError("Password must contain at least one symbol!");
+    return;
+  }
+
+  if (name && email && phone && password) {
+    try {
+      const data = await registerUser(name, email, phone, password);
+      if (data?.data?.data) {
+        window.location.replace(`/auth/otp?email=${email}`);
       }
-    } else {
-      setError("All fields must be filled out");
+    } catch (error: any) {
+      setError(error?.message || "An error occurred during registration.");
     }
-  };
+  } else {
+    setError("All fields must be filled out");
+  }
+};
 
   return (
     <div className="container relative mx-auto justify-center mb-20 items-center flex w-full">

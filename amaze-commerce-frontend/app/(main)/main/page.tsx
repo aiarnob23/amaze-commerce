@@ -1,3 +1,4 @@
+
 import Categories from "@/components/categories/categories";
 import PopularProducts from "@/components/products/popularProducts";
 import Slider from "@/components/ui/slider";
@@ -17,7 +18,6 @@ export default function Home() {
         <h2 className="text-2xl font-semibold text-center my-10">Our Most Populars</h2>
         <PopularProducts />
       </div>
-      <div></div>
     </main>
   );
 }

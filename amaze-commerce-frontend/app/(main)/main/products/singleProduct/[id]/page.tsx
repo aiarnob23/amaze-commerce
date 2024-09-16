@@ -10,8 +10,7 @@ export default async function SingleProduct({
 }) {
   const { id } = params;
   const product = await getProductById(id);
-  const tags: any = product?.tags ? product.tags[0] : product?.category;
-  const relatedProducts = await getRelatedProducts(tags);
+  const relatedProducts = await getRelatedProducts(product?.category);
 
   return (
     <div className="min-h-screen container mx-auto">

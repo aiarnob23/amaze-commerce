@@ -29,12 +29,12 @@ export default function AdminSideBar() {
       </div>
       <div>
         <Link
-          href="/admin/orders"
+          href="/admin/carts"
           className={`block px-4 py-2 ${
-            pathname === "/admin/orders" ? "text-3xl" : ""
+            pathname === "/admin/carts" ? "text-3xl" : ""
           }`}
         >
-          Orders
+          Carts
         </Link>
       </div>
       <div>
@@ -45,6 +45,16 @@ export default function AdminSideBar() {
           }`}
         >
           Customers
+        </Link>
+      </div>
+      <div>
+        <Link
+          href="/admin/statistics"
+          className={`block px-4 py-2 ${
+            pathname === "/admin/statistics" ? "text-3xl" : ""
+          }`}
+        >
+          Statistics
         </Link>
       </div>
     </div>
