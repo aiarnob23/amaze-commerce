@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["https://amaze-commerce-front.vercel.app"],
+    //origin: ["http://localhost:3000"],
     credentials: true,
   })
 );

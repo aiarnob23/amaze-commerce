@@ -18,7 +18,7 @@ export default async function Products({
       <div></div>
 
       {/* products div */}
-      <div className="grid grid-cols-4 gap-7">
+      <div className="grid justify-center items-center  lg:grid-cols-4 gap-7">
         {products.map((product: any) => (
           <Link
             href={`/main/products/singleProduct/${product._id}`}
@@ -44,7 +44,7 @@ export default async function Products({
       </div>
 
       {/* pagination div */}
-      <div>
+      <div className="px-6 lg:px-0">
         <Pagination
           totalPages={totalPages}
           initialPage={page}

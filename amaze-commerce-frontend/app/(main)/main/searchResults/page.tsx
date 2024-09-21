@@ -4,7 +4,7 @@ import SearchResultsClient from "@/components/products/searchResultsClient";
 
 export default function SearchResults() {
   return (
-    <div className="container mx-auto">
+    <div className="container px-4 lg:px-0 mx-auto">
       <Suspense fallback={<div>Loading search results...</div>}>
         <SearchResultsClient />
       </Suspense>

@@ -14,7 +14,7 @@ import Link from "next/link";
 export default function Slider() {
   return (
     <Swiper
-      className="h-[600px] w-full"
+      className="h-[600px]  w-full"
       modules={[Navigation, Autoplay]}
       slidesPerView={1}
       navigation

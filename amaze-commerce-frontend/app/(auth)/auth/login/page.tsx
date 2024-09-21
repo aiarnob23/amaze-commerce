@@ -48,7 +48,7 @@ export default function Login() {
                 </label>
                 <input
                   type="email"
-                  className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                  className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <label
@@ -59,7 +59,7 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
-                  className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                  className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button

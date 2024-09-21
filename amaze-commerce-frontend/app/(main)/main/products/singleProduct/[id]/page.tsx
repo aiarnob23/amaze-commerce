@@ -13,9 +13,9 @@ export default async function SingleProduct({
   const relatedProducts = await getRelatedProducts(product?.category);
 
   return (
-    <div className="min-h-screen container mx-auto">
+    <div className="min-h-screen px-4 lg:px-0 mt-12 lg:mt-8 container mx-auto">
       {/* products info  div */}
-      <div className="flex justify-between gap-7 items-center">
+      <div className="flex flex-col gap-16 lg:flex-row justify-between lg:gap-7 items-center">
         {/* info */}
         <div className="flex gap-10 h-full">
           <div>

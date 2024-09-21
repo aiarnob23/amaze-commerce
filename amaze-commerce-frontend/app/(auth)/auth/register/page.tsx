@@ -71,7 +71,7 @@ const handleRegisterUser = async (e: FormEvent) => {
             Amaze<span className="text-yellow-500">Com</span>
           </h1>
         </Link>
-        <div className="flex flex-col md:glass justify-center border-2 py-12 shadow-lg  px-8 rounded-lg items-start">
+        <div className="flex flex-col md:glass justify-center border-2 lg:py-12 shadow-lg  px-8 rounded-lg items-start">
           <h3 className="text-4xl font-semibold mb-6">Create account</h3>
           <div>
             <form onSubmit={handleRegisterUser} className="flex flex-col">
@@ -80,7 +80,7 @@ const handleRegisterUser = async (e: FormEvent) => {
               </label>
               <input
                 type="text"
-                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -89,7 +89,7 @@ const handleRegisterUser = async (e: FormEvent) => {
               </label>
               <input
                 type="email"
-                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -98,7 +98,7 @@ const handleRegisterUser = async (e: FormEvent) => {
               </label>
               <input
                 type="tel"
-                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -107,7 +107,7 @@ const handleRegisterUser = async (e: FormEvent) => {
               </label>
               <input
                 type="password"
-                className="rounded-lg p-2 mb-4 w-[400px] border-gray-400 border-2"
+                className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

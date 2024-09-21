@@ -35,7 +35,7 @@ const Cart = () => {
 
 
   return (
-    <div className="min-h-screen flex flex-row justify-evenly container mx-auto">
+    <div className="min-h-screen flex flex-col lg:flex-row justify-evenly container mx-auto">
       {/* cart products div */}
       <div>
         {loading ? (
@@ -44,7 +44,7 @@ const Cart = () => {
           <div>
             {cartData.items.map((item: any) => (
               <div
-                className="gap-12 my-10 p-6 rounded-lg shadow-md shadow-zinc-200 text-xl text-gray-600 flex flex-row items-center justify-center"
+                className="gap-12 my-10 p-6 rounded-lg shadow-md shadow-zinc-200 text-xl text-gray-600 flex flex-col px-4 lg:px-0 lg:flex-row items-center justify-center"
                 key={item._id}
               >
                 <div>
@@ -82,7 +82,7 @@ const Cart = () => {
       </div>
       {/* payment div */}
       <div>
-        <div className="flex flex-col items-center mt-6 px-4 border-2 pt-6 pb-8 rounded-lg shadow-xl shadow-gray-300 w-[460px] gap-4">
+        <div className="flex flex-col items-center mt-6 px-4 mx-4 lg:mx-0 border-2 pt-6 pb-8 rounded-lg shadow-xl shadow-gray-300  lg:w-[460px] gap-4">
           <p className="text-3xl font-semibold">Subtotal</p>
           <p className="text-xl font-bold text-gray-600">
             $ {cartData?.totalPrice?.toFixed(3)}

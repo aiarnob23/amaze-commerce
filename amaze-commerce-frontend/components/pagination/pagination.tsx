@@ -41,7 +41,7 @@ export default function Pagination({
   }
 
   return (
-    <div className="flex flex-row space-x-8 my-8">
+    <div className="grid grid-cols-2 gap-2 lg:grid-cols-10 lg:gap-12  my-8">
       {pages.map((page) => (
         <button
           key={page}

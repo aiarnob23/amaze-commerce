@@ -37,9 +37,9 @@ const Products = ({ params }: { params: { productsPage: string } }) => {
       <div></div>
 
       {/* products div */}
-      <div className="grid grid-cols-3 w-full gap-16 mt-2 ">
+      <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-16 mt-2 ">
         {products.map((product: any) => (
-          <div key={product?._id} className="card bg-base-100 w-96 shadow-xl">
+          <div key={product?._id} className="card bg-base-100 w-[300px] md:w-96 shadow-xl">
             <figure className="px-10 pt-10 relative h-[300px]">
               {/* Fixed height for consistent layout */}
               <Image

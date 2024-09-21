@@ -15,7 +15,7 @@ export default function Layout({
   return (
     <div>
       <AdminNavbar />
-      <div className="flex gap-12">
+      <div className="flex gap-3 md:gap-12">
         <div>
           <AdminSideBar />
         </div>

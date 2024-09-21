@@ -119,7 +119,7 @@ const EditProductPage = ({
     const updatedData = { name, description, price, color, tags, about, category, brand, stock, displayImage };
     const res = await updateProduct(product?._id, updatedData);
     if (res?.data?.success) {
-      successAlert('Product Updated Successfully. For fast result please reload products page . Thank you 😊')
+      successAlert('Product Updated Successfully.')
       setTimeout(() => {
         window.location.replace(`/admin/products/1`);
       }, (800));
