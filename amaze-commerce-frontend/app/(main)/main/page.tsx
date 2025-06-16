@@ -15,7 +15,6 @@ export default function Home() {
         <Categories />
       </div>
       <div className="container mt-16 mx-2 md:mx-auto ">
-        <h2 className="text-2xl px-4 lg:px-0 font-semibold text-center my-10">Our Most Populars</h2>
         <PopularProducts />
       </div>
     </main>

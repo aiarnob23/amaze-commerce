@@ -5,6 +5,7 @@ import { productsServices } from "./products.service";
 
 //get products
 const getProducts = catchAsync(async (req, res) => {
+    console.log(req.query)
     const { data, totalCounts } = await productsServices.getProducts(req.query);
     const result = {
         data,

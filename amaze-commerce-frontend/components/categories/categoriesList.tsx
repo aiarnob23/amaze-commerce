@@ -28,10 +28,5 @@ export const categories = [
     _id: 6,
     name: "Home Decor",
     image: "/categories/decor.jpg",
-  },
-  {
-    _id: 7,
-    name: "Outdoor",
-    image: "/categories/outdoor.jpg",
-  },
+  }
 ];

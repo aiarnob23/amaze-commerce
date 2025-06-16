@@ -5,9 +5,7 @@ import { SERVER_BASE_URL } from "../config";
 
 //get popular products
 export async function getPopularProducts() {
-  const res = await fetch(`${SERVER_BASE_URL}/products?sort=-rating&limit=16`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`${SERVER_BASE_URL}/products?sort=-rating&limit=16`);
   const data = await res.json();
   return data.data.data;
 }

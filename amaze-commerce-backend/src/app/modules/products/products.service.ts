@@ -1,4 +1,5 @@
 
+import { CLIENT_RENEG_LIMIT } from "tls";
 import QueryBuilder from "../../builder/queryBuilder";
 import { productsSearchableFields } from "./products.constant";
 import { Product } from "./products.model";
@@ -14,6 +15,7 @@ const getProducts = async (query: Record<string, unknown>) => {
 
   const data = await productQuery.modelQuery;
   const totalCounts = await Product.countDocuments();
+  console.log(data);
   return {
     data,
     totalCounts,

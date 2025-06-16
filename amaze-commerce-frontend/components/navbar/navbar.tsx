@@ -5,6 +5,7 @@ import Image from "next/image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAuth } from "@/app/provider/AuthProvider";
 import { useState, useEffect, useRef } from "react";
+import { ShoppingCart } from "lucide-react";
 
 export default function NavBar() {
   const { user, logout } = useAuth();
@@ -19,6 +20,8 @@ export default function NavBar() {
   const handleLogOut = async () => {
     logout();
   };
+
+  const [cartItems, setCartItems] = useState<number|null>(0);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,17 +41,20 @@ export default function NavBar() {
     };
   }, []);
 
-  // Nav links with admin link conditionally rendered
+  // Nav links 
   const NavLinks = (
     <>
+      <li>
+        <Link href="/main">Home</Link>
+      </li>
       <li>
         <Link href="/main/products/1">All Products</Link>
       </li>
       <li>
-        <Link href="/auth/register">Register</Link>
+        <Link href="/main/about">About</Link>
       </li>
       <li>
-        <Link href="/main/user/cart">Cart</Link>
+        <Link href="/auth/contact">Contact</Link>
       </li>
       {user?.role === "admin" && (
         <li>
@@ -93,8 +99,15 @@ export default function NavBar() {
             </h3>
           </Link>
         </div>
+
+        {/* Navbar center */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal font-semibold px-1">
+            {NavLinks}
+          </ul>
+        </div>
         {/* Search field */}
-        <div className="absolute ml-20 md:relative mt-[80px] md:mt-0">
+        <div className="absolute md:relative mt-[80px] md:mt-0">
           <form action="/main/searchResults" method="get">
             <input
               type="text"
@@ -107,18 +120,20 @@ export default function NavBar() {
             </button>
           </form>
         </div>
-        {/* Navbar center */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal font-semibold px-1">
-            {NavLinks}
-          </ul>
-        </div>
         {/* Navbar end */}
-        <div className="navbar-end">
+        <div className="navbar-end relative">
+          <Link className="mr-4" href='/'>
+            <div className="flex items-center space-x-2">
+              <ShoppingCart size={24} className="text-gray-800" />
+            </div>
+            <div className="absolute -top-[4px] right-[60px]">
+              <span className="text-yellow-600 text-[12px] font-semibold">{cartItems}</span>
+            </div>
+          </Link>
           <button
             onClick={toggleUserItems}
             ref={userIconRef}
-            className="btn btn-ghost"
+            className="btn btn-ghost "
           >
             <Image src={UserIcon} alt="user" height={20} width={20} />
           </button>

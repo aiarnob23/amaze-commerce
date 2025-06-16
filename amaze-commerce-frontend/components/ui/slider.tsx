@@ -1,120 +1,114 @@
-"use client";
-import { Navigation, Autoplay } from "swiper/modules";
-import KitchenWare from "@/public/carousels/kitchen-ware.jpg";
-import gaming from "@/public/carousels/gaming.jpg";
-import furniture from "@/public/carousels/furniture.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import Image from "next/image";
-import Link from "next/link";
+const slides = [
+  {
+    id: 1,
+    title: "Summer Collection 2025",
+    subtitle: "Discover the latest trends",
+    description: "Up to 50% off on selected items",
+    image: "https://images.pexels.com/photos/1884581/pexels-photo-1884581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    cta: "Shop Now"
+  },
+  {
+    id: 2,
+    title: "Tech Essentials",
+    subtitle: "Power up your lifestyle",
+    description: "Latest gadgets and electronics",
+    image: "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    cta: "Explore"
+  },
+  {
+    id: 3,
+    title: "Home & Living",
+    subtitle: "Transform your space",
+    description: "Beautiful furniture and decor",
+    image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    cta: "Browse"
+  }
+];
 
 export default function Slider() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
   return (
-    <Swiper
-      className="h-[600px]  w-full"
-      modules={[Navigation, Autoplay]}
-      slidesPerView={1}
-      navigation
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
-    >
-      {/* Kitchenware Slide */}
-      <SwiperSlide>
-        <div className="flex flex-col md:flex-row h-full w-full rounded-lg bg-[#F7F7F7] shadow-lg">
-          <div className="md:w-1/2 flex justify-center items-center">
-            <div className="h-[500px] w-[600px]">
-              <Image
-                height={500}
-                width={600}
-                src={KitchenWare}
-                alt="kitchenware"
-                className="h-full w-full object-cover rounded-lg"
-              />
+    <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div
+            className="w-full h-full bg-cover bg-center relative"
+            style={{ backgroundImage: `url(${slide.image})` }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-40" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-white max-w-2xl px-6">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
+                  {slide.title}
+                </h1>
+                <p className="text-xl md:text-2xl mb-2 opacity-90">
+                  {slide.subtitle}
+                </p>
+                <p className="text-lg mb-8 opacity-80">
+                  {slide.description}
+                </p>
+                <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center mx-auto">
+                  <ShoppingBag className="mr-2 h-5 w-5" />
+                  {slide.cta}
+                </button>
+              </div>
             </div>
           </div>
-          <div className="flex py-6 md:py-0 md:w-1/2 justify-center items-center flex-col bg-[#FFF7E0] px-10">
-            <h3 className="text-3xl lg:text-4xl mb-4 text-blue-900 font-semibold">
-              Kitchen Essentials Sale
-            </h3>
-            <p className="text-lg md:text-xl text-gray-700 mb-4 text-center">
-              Elevate your cooking experience with our premium kitchenware.
-              Enjoy up to{" "}
-              <span className="font-bold text-red-500">40% off</span>!
-            </p>
-            <Link href="/main/products/1">
-              <button className="lowercase bg-slate-600 text-yellow-300 px-3 py-2 rounded-lg text-xl">
-                Shop Now
-              </button>
-            </Link>
-          </div>
         </div>
-      </SwiperSlide>
+      ))}
 
-      {/* Furniture Slide */}
-      <SwiperSlide>
-        <div className="flex flex-col md:flex-row h-full w-full rounded-lg bg-[#FFF3E0] shadow-lg">
-          <div className="md:w-1/2 flex justify-center items-center">
-            <div className="h-[500px] w-[600px]">
-              <Image
-                height={500}
-                width={600}
-                src={furniture}
-                alt="furniture"
-                className="h-full w-full object-cover rounded-lg"
-              />
-            </div>
-          </div>
-          <div className="flex py-6 md:py-0 md:w-1/2 justify-center items-center flex-col bg-[#ecf0e9] px-10">
-            <h3 className="text-3xl lg:text-4xl mb-4 text-blue-900 font-semibold">
-              Trendy Furniture Sale
-            </h3>
-            <p className="text-lg md:text-xl text-gray-700 mb-4 text-center">
-              Discover modern furniture to transform your space. Get up to{" "}
-              <span className="font-bold text-red-500">50% off</span> on
-              selected items.
-            </p>
-            <Link href="/main/products/1">
-              <button className="lowercase bg-slate-600 text-yellow-300 px-3 py-2 rounded-lg text-xl">
-                Shop Now
-              </button>
-            </Link>
-          </div>
-        </div>
-      </SwiperSlide>
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-300"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-300"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
 
-      {/* Gaming Slide */}
-      <SwiperSlide>
-        <div className="flex flex-col md:flex-row h-full w-full rounded-lg bg-[#F9F9E0] shadow-lg">
-          <div className="md:w-1/2 flex justify-center items-center">
-            <div className="h-[500px] w-[600px]">
-              <Image
-                height={500}
-                width={600}
-                src={gaming}
-                alt="gaming"
-                className="h-full w-full object-cover rounded-lg"
-              />
-            </div>
-          </div>
-          <div className="flex py-6 md:py-0 md:w-1/2 justify-center items-center flex-col bg-[#f2f1f3] px-10">
-            <h3 className="text-3xl lg:text-4xl mb-4 text-blue-900 font-semibold">
-              Ultimate Gaming Gear
-            </h3>
-            <p className="text-lg md:text-xl text-gray-700 mb-4 text-center">
-              Upgrade your gaming setup with top-tier accessories. Limited-time
-              offer with{" "}
-              <span className="font-bold text-red-500">up to 30% off</span>.
-            </p>
-            <Link href="/main/products/1">
-              <button className="lowercase bg-slate-600 text-yellow-300 px-3 py-2 rounded-lg text-xl">
-                Shop Now
-              </button>
-            </Link>
-          </div>
-        </div>
-      </SwiperSlide>
-    </Swiper>
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

@@ -6,12 +6,14 @@ import { successAlert } from "@/lib/utils/sweetAlerts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { Eye, EyeOff } from "lucide-react"; // Import the Lucide icons for eye and eye off
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState<string | "">("");
   const [password, setPassword] = useState<string | "">("");
   const [loginError, setLoginError] = useState<any>("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const { login } = useAuth();
 
   const handleLogin = async (e: FormEvent) => {
@@ -39,10 +41,10 @@ export default function Login() {
               Amaze<span className="text-yellow-500">Com</span>
             </h1>
           </Link>
-          <div className="flex flex-col shadow-running-animation justify-center border-2 py-12 shadow-lg px-8 rounded-lg items-start">
+          <div className="flex flex-col justify-center border-2 py-12 shadow-lg px-8 rounded-lg items-start">
             <h3 className="text-4xl font-semibold mb-6">Sign in</h3>
             <div>
-              <form onSubmit={handleLogin} action="" className="flex flex-col">
+              <form onSubmit={handleLogin} className="flex flex-col">
                 <label htmlFor="email" className="text-xl font-semibold mb-1">
                   Your email
                 </label>
@@ -57,11 +59,19 @@ export default function Login() {
                 >
                   Enter password
                 </label>
-                <input
-                  type="password"
-                  className="rounded-lg p-2 mb-4 lg:w-[400px] border-gray-400 border-2"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="relative mb-4 lg:w-[400px]">
+                  <input
+                    type={showPassword ? "text" : "password"} 
+                    className="rounded-lg p-2 w-full border-gray-400 border-2"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)} 
+                  >
+                    {showPassword ? <EyeOff /> : <Eye />}
+                  </div>
+                </div>
                 <button
                   type="submit"
                   className="text-xl font-semibold btn btn-warning"

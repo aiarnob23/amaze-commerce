@@ -47,7 +47,7 @@ export default function Pagination({
           key={page}
           onClick={() => handleclick(page)}
           className={`btn ${
-            currentPage === page ? "btn-primary" : ""
+            currentPage === page ? "button-gradient" : "rounded-2xl"
           }`}
         >
           {page}

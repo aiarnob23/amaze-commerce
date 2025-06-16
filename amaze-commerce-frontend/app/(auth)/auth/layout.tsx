@@ -1,5 +1,3 @@
-
-import Footer from "@/components/footer/footer";
 import type { Metadata } from "next";
 
 
@@ -17,7 +15,7 @@ export default function Layout({
     <div>
       {children}
       <div className="flex justify-center items-center">
-        <p className="text-xl px-6 lg:px-0 text-gray-500">© 2024-2026, AmazeCom.com, Inc. or its affiliates</p>
+        <p className="text-xl px-6 lg:px-0 text-gray-500">©2024, AmazeCom.com, Inc. or its affiliates</p>
       </div>
     </div>
   );
