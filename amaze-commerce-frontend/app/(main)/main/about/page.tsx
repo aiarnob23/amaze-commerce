@@ -98,7 +98,7 @@ export default function About() {
               <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"> E-Commerce</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-12">
-              We're not just another online store. We're a passionate team dedicated to creating exceptional shopping experiences that connect people with products they love, backed by innovation, quality, and genuine care.
+              We&apos;re not just another online store. We&apos;re a passionate team dedicated to creating exceptional shopping experiences that connect people with products they love, backed by innovation, quality, and genuine care.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-4 rounded-xl hover:from-indigo-600 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold">
@@ -126,10 +126,10 @@ export default function About() {
                 What started as a simple idea in 2020 has grown into a global platform serving millions of customers worldwide. We saw the need for a more personal, intuitive, and trustworthy online shopping experience.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                From our humble beginnings in a small office to becoming a leading e-commerce platform, we've never lost sight of our core mission: making online shopping delightful, accessible, and meaningful for everyone.
+                From our humble beginnings in a small office to becoming a leading e-commerce platform, we&apos;ve never lost sight of our core mission: making online shopping delightful, accessible, and meaningful for everyone.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Today, we're proud to be trusted by millions of customers who rely on us for quality products, exceptional service, and innovative solutions that make their lives better.
+                Today, we&apos;re proud to be trusted by millions of customers who rely on us for quality products, exceptional service, and innovative solutions that make their lives better.
               </p>
             </div>
           </div>
@@ -140,7 +140,6 @@ export default function About() {
                 <Image
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&crop=center"
                   alt="Our team working together"
-                  fill
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -188,7 +187,6 @@ export default function About() {
                 <Image
                   src={member.image}
                   alt={member.name}
-                  fill
                   className="rounded-full object-cover border-4 border-white shadow-lg group-hover:scale-110 transition-transform duration-300"
                 />
               </div>

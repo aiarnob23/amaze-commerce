@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -135,7 +134,7 @@ export default function Contact() {
     },
     {
       question: "How can I track my order?",
-      answer: "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account dashboard."
+      answer: "Once your order ships, you&apos;ll receive a tracking number via email. You can also track orders in your account dashboard."
     }
   ];
 
@@ -160,7 +159,7 @@ export default function Contact() {
             <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"> Touch</span>
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed mb-12">
-            We'd love to hear from you. Send us a message and we'll respond as soon as possible. Our team is here to help with any questions or support you need.
+            We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible. Our team is here to help with any questions or support you need.
           </p>
         </div>
 
@@ -199,7 +198,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">Message Sent!</h3>
-                  <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                  <p className="text-gray-600">Thank you for contacting us. We&apos;ll get back to you within 24 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
