@@ -51,11 +51,9 @@ const Customers = () => {
   };
 
   return (
-    <div className="w-full mx-auto py-12 px-8">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800 text-center">
-        Customer Management
-      </h2>
-      <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50/30 via-white to-purple-50/30 py-12 px-8">
+      <h2 className="text-3xl font-bold mb-8 text-gray-800 text-center">Customer Management</h2>
+      <div className="overflow-x-auto bg-white shadow-lg rounded-lg border border-gray-200">
         <table className="table-auto w-full text-left bg-white">
           <thead className="bg-gray-100 border-b">
             <tr>
@@ -64,12 +62,8 @@ const Customers = () => {
               <th className="px-6 py-4 text-gray-600 font-semibold">Email</th>
               <th className="px-6 py-4 text-gray-600 font-semibold">Phone</th>
               <th className="px-6 py-4 text-gray-600 font-semibold">Role</th>
-              <th className="px-6 py-4 text-gray-600 font-semibold">
-                Verified?
-              </th>
-              <th className="px-6 py-4 text-gray-600 font-semibold">
-                Update Role
-              </th>
+              <th className="px-6 py-4 text-gray-600 font-semibold">Verified?</th>
+              <th className="px-6 py-4 text-gray-600 font-semibold">Update Role</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -101,7 +95,7 @@ const Customers = () => {
                   {singleUser?.role === "user" ? (
                     <button
                       onClick={() => UserToAdmin(singleUser?._id)}
-                      className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-all duration-200"
+                      className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transition-all duration-200"
                     >
                       Make Admin
                     </button>

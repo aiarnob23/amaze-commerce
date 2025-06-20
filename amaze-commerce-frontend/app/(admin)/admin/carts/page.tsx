@@ -24,9 +24,9 @@ const Carts = () => {
   }, [fetchOrders]);
 
   return (
-    <div className="p-4">
-      <h1 className="text-4xl font-bold mb-6">Users Cart</h1>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50/30 via-white to-purple-50/30 p-8">
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Users Cart</h1>
+      <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
             <tr>

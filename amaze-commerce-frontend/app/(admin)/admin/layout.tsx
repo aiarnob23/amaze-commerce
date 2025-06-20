@@ -1,5 +1,6 @@
-import AdminNavbar from "@/components/admin/navbar";
-import AdminSideBar from "@/components/admin/sideBav";
+
+import { AdminNavbar } from "@/components/admin/navbar";
+import AdminSideBar from "@/components/admin/sideBar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

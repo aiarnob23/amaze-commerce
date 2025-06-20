@@ -9,7 +9,7 @@ const slides = [
     subtitle: "Discover the latest trends",
     description: "Up to 50% off on selected items",
     image: "https://images.pexels.com/photos/1884581/pexels-photo-1884581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    cta: "Shop Now"
+    cta: "15% Discount"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const slides = [
     subtitle: "Power up your lifestyle",
     description: "Latest gadgets and electronics",
     image: "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    cta: "Explore"
+    cta: "10% Off"
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const slides = [
     subtitle: "Transform your space",
     description: "Beautiful furniture and decor",
     image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    cta: "Browse"
+    cta: "Coupon Available"
   }
 ];
 
@@ -73,7 +73,7 @@ export default function Slider() {
                 <p className="text-lg mb-8 opacity-80">
                   {slide.description}
                 </p>
-                <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center mx-auto">
+                <button className="bg-gradient-to-r from-purple-500  to-indigo-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center mx-auto">
                   <ShoppingBag className="mr-2 h-5 w-5" />
                   {slide.cta}
                 </button>

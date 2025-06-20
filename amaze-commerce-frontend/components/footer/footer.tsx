@@ -1,69 +1,239 @@
+import { 
+  Mail, 
+  MapPin, 
+  Phone, 
+  Facebook, 
+  Linkedin, 
+  Twitter, 
+  Instagram,
+  ArrowRight,
+  Heart,
+  Sparkles,
+  Zap,
+  Shield,
+  Award,
+  Headphones
+} from "lucide-react";
+
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  const services = [
+    { name: "Branding", icon: Sparkles },
+    { name: "Design", icon: Award },
+    { name: "Marketing", icon: Zap },
+    { name: "Advertisement", icon: Shield }
+  ];
+
+  const company = [
+    { name: "About us", href: "/about" },
+    { name: "Contact", href: "/contact" },
+    { name: "Jobs", href: "/jobs" },
+    { name: "Press kit", href: "/press" }
+  ];
+
+  const socialLinks = [
+    { 
+      name: "LinkedIn", 
+      href: "https://www.linkedin.com", 
+      icon: Linkedin,
+      color: "hover:text-blue-600 hover:bg-blue-50"
+    },
+    { 
+      name: "Facebook", 
+      href: "https://www.facebook.com", 
+      icon: Facebook,
+      color: "hover:text-blue-700 hover:bg-blue-50"
+    },
+    { 
+      name: "Twitter", 
+      href: "https://www.twitter.com", 
+      icon: Twitter,
+      color: "hover:text-sky-500 hover:bg-sky-50"
+    },
+    { 
+      name: "Instagram", 
+      href: "https://www.instagram.com", 
+      icon: Instagram,
+      color: "hover:text-pink-600 hover:bg-pink-50"
+    }
+  ];
+
   return (
-    <footer className="footer mt-6 bg-base-300 text-base-content p-10">
-      <nav>
-        <h6 className="footer-title">Services</h6>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
-      </nav>
-      <nav>
-        <h6 className="footer-title">Contact</h6>
-        <div className="grid grid-flow-col gap-4">
-          {/* LinkedIn */}
-          <a
-            href="https://www.linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.795-1.75-1.732s.784-1.732 1.75-1.732 1.75.795 1.75 1.732-.784 1.732-1.75 1.732zm13.5 11.268h-3v-5.414c0-1.291-.025-2.952-1.798-2.952-1.8 0-2.075 1.402-2.075 2.851v5.515h-3v-10h2.877v1.367h.041c.4-.759 1.378-1.556 2.836-1.556 3.033 0 3.594 1.997 3.594 4.591v5.598z" />
-            </svg>
-          </a>
-          {/* Facebook */}
-          <a
-            href="https://www.facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-            </svg>
-          </a>
-          {/* Email */}
-          <a className="" href="mailto:aiarnob23@gmail.com">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M12 12.713l-8-5.6v9.887h16v-9.887l-8 5.6zm0-2.302l8-5.598h-16l8 5.598zm10-5.411v11.999c0 1.104-.896 2-2 2h-16c-1.104 0-2-.896-2-2v-11.999c0-1.104.896-2 2-2h16c1.104 0 2 .896 2 2z" />
-            </svg>
-          </a>
+    <footer className="relative bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-100 mt-16">
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-100 via-purple-200 to-pink-100"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        
+        {/* Main footer content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          
+          {/* Brand Section */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center space-x-2 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-lg">A</span>
+              </div>
+              <span className="text-2xl font-bold text-gradient">
+                Amaze<span className="text-yellow-500">Com</span>
+              </span>
+            </div>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Transforming ideas into exceptional digital experiences. We're passionate about creating innovative solutions that make a difference.
+            </p>
+            
+            {/* Contact info */}
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3 text-gray-600">
+                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                  <Mail size={16} className="text-indigo-600" />
+                </div>
+                <a href="mailto:aiarnob23@gmail.com" className="hover:text-indigo-600 transition-colors duration-200">
+                  aiarnob23@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-3 text-gray-600">
+                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <Phone size={16} className="text-purple-600" />
+                </div>
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center space-x-3 text-gray-600">
+                <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
+                  <MapPin size={16} className="text-pink-600" />
+                </div>
+                <span>Dhaka, Bangladesh</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+              <Headphones size={20} className="mr-2 text-indigo-500" />
+              Services
+            </h3>
+            <ul className="space-y-3">
+              {services.map((service) => {
+                const IconComponent = service.icon;
+                return (
+                  <li key={service.name}>
+                    <a
+                      href="#"
+                      className="flex items-center space-x-3 text-gray-600 hover:text-indigo-600 transition-all duration-200 group"
+                    >
+                      <div className="w-6 h-6 bg-gray-100 rounded-md flex items-center justify-center group-hover:bg-indigo-100 transition-colors duration-200">
+                        <IconComponent size={14} className="group-hover:text-indigo-600" />
+                      </div>
+                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                        {service.name}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+              <Award size={20} className="mr-2 text-purple-500" />
+              Company
+            </h3>
+            <ul className="space-y-3">
+              {company.map((item) => (
+                <li key={item.name}>
+                  <a
+                    href={item.href}
+                    className="flex items-center space-x-2 text-gray-600 hover:text-purple-600 transition-all duration-200 group"
+                  >
+                    <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    <span className="group-hover:translate-x-1 transition-transform duration-200">
+                      {item.name}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+              <Sparkles size={20} className="mr-2 text-pink-500" />
+              Stay Connected
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Subscribe to our newsletter for the latest updates and exclusive offers.
+            </p>
+            
+            <div className="space-y-3">
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-400 focus:outline-none transition-colors duration-200 pr-12"
+                />
+                <button
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 hover:scale-105"
+                >
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-6">
+              <p className="text-sm font-medium text-gray-700 mb-3">Follow us</p>
+              <div className="flex space-x-3">
+                {socialLinks.map((social) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-10 h-10 bg-white border-2 border-gray-200 rounded-xl flex items-center justify-center text-gray-600 transition-all duration-200 hover:border-transparent hover:scale-110 hover:shadow-lg ${social.color}`}
+                    >
+                      <IconComponent size={18} />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
+
+        {/* Bottom section */}
+        <div className="border-t border-gray-200 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-2 text-gray-600">
+              <span>© {currentYear} AmazeCom. Made with</span>
+              <Heart size={16} className="text-red-500 animate-pulse" />
+              <span>in Bangladesh</span>
+            </div>
+            
+            <div className="flex items-center space-x-6 text-sm">
+              <a href="/privacy" className="text-gray-600 hover:text-indigo-600 transition-colors duration-200">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-600 hover:text-indigo-600 transition-colors duration-200">
+                Terms of Service
+              </a>
+              <a href="/cookies" className="text-gray-600 hover:text-indigo-600 transition-colors duration-200">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-br from-pink-500/10 to-yellow-500/10 rounded-full blur-2xl"></div>
     </footer>
   );
 }

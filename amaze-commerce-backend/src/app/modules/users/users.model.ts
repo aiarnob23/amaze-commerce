@@ -2,6 +2,7 @@ import { model, Schema } from "mongoose";
 import { TUser, UserModel } from "./users.interface";
 import bcrypt from 'bcrypt';
 import config from "../../config";
+import { number } from "zod";
 
 const userSchema = new Schema<TUser, UserModel>({
     name: {
@@ -19,6 +20,22 @@ const userSchema = new Schema<TUser, UserModel>({
         type: String,
         required: true,
         trim:true,
+    },
+    shippingAddress:{
+        type:String,
+        default:"",
+    },
+    city:{
+        type:String,
+        default:"",
+    },
+    country:{
+        type:String,
+        default:"",
+    },
+    postalCode:{
+        type:Number,
+        default:null,
     },
     password: {
         type: String,

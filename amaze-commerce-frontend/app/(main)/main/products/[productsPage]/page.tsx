@@ -13,7 +13,8 @@ export default function Products({
   const page = parseInt(params.productsPage);
   const perPage = 20;
 
-  const [products, setProducts] = useState<any[]>([]);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,15 +40,15 @@ export default function Products({
     { value: "newest", label: "Newest First" }
   ];
 
-  // Fetch products on page load or when filters change
+  // Fetch all products initially
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
         setError(null);
-        const { products, totalPages } = await getAllProducts(page, perPage);
-        setProducts(products);
-        setTotalPages(totalPages);
+        // Fetch all products without pagination for filtering
+        const { products, totalPages } = await getAllProducts(1, 1000); // Get large number to get all products
+        setAllProducts(products);
       } catch (error) {
         setError("Failed to fetch products. Please try again.");
       } finally {
@@ -55,14 +56,78 @@ export default function Products({
       }
     };
     fetchProducts();
-  }, [page, selectedCategory, priceRange, sortBy]);
+  }, []);
+
+  // Apply filters and sorting whenever dependencies change
+  useEffect(() => {
+    if (allProducts.length === 0) return;
+
+    let filtered = [...allProducts];
+
+    // Apply category filter
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter(product => 
+        product.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Apply price range filter
+    if (priceRange !== "all") {
+      const [min, max] = priceRange.split("-").map(p => {
+        if (p === "250+") return [250, Infinity];
+        return parseInt(p);
+      });
+      
+      if (priceRange === "250+") {
+        filtered = filtered.filter(product => product.price >= 250);
+      } else {
+        const minPrice = parseInt(priceRange.split("-")[0]);
+        const maxPrice = parseInt(priceRange.split("-")[1]);
+        filtered = filtered.filter(product => 
+          product.price >= minPrice && product.price <= maxPrice
+        );
+      }
+    }
+
+    // Apply sorting
+    switch (sortBy) {
+      case "price-low":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "price-high":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case "name":
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "newest":
+        // Assuming products have a createdAt or similar field
+        filtered.sort((a, b) => new Date(b.createdAt || b._id).getTime() - new Date(a.createdAt || a._id).getTime());
+        break;
+      case "featured":
+      default:
+        // Keep original order or sort by some featured logic
+        break;
+    }
+
+    setFilteredProducts(filtered);
+    setTotalPages(Math.ceil(filtered.length / perPage));
+  }, [allProducts, selectedCategory, priceRange, sortBy, perPage]);
+
+  // Get products for current page
+  const getCurrentPageProducts = () => {
+    const startIndex = (page - 1) * perPage;
+    const endIndex = startIndex + perPage;
+    return filteredProducts.slice(startIndex, endIndex);
+  };
 
   // Handle page change for pagination
   const handlePageChange = (newPage: number) => {
     window.location.href = `/main/products/${newPage}`;
   };
 
-
+  // Get current page products
+  const currentProducts = getCurrentPageProducts();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -193,7 +258,7 @@ export default function Products({
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-bold text-gray-800">
-              {loading ? "Loading..." : `${products.length} Products Found`}
+              {loading ? "Loading..." : `${filteredProducts.length} Products Found`}
             </h2>
             <div className="text-sm text-gray-600">
               Page {page} of {totalPages}
@@ -206,7 +271,6 @@ export default function Products({
               <div className="relative">
                 <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
                 <div className="mt-4 text-center text-lg font-semibold text-gray-600">
-                  Loading amazing products...
                 </div>
               </div>
             </div>
@@ -224,13 +288,31 @@ export default function Products({
                 </button>
               </div>
             </div>
+          ) : currentProducts.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 max-w-md mx-auto">
+                <div className="text-gray-400 text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">No Products Found</h3>
+                <p className="text-gray-600">Try adjusting your filters to see more results.</p>
+                <button
+                  onClick={() => {
+                    setSelectedCategory("all");
+                    setPriceRange("all");
+                    setSortBy("featured");
+                  }}
+                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </div>
           ) : (
             <div className={
               viewMode === "grid"
                 ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
                 : "space-y-6"
             }>
-              {products.map((product: any) => (
+              {currentProducts.map((product: any) => (
                 <div
                   key={product._id}
                   className={`group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden ${viewMode === "list" ? "flex" : ""
